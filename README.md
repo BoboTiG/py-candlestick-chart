@@ -1,15 +1,13 @@
 # Python Candlesticks Chart
 
-📈 Draw candlesticks charts right into your terminal with Python!
+📈 Draw candlesticks charts right into your terminal, using Python!
 
 ![Preview](examples/screenshot.png)
 
-This is a portage from the great [cli-candlestick-chart](https://github.com/Julien-R44/cli-candlestick-chart) (developed by @Julien-R44, written in Rust). You are looking at the Python 3.10+ version.
+This is a portage from the great [cli-candlestick-chart](https://github.com/Julien-R44/cli-candlestick-chart) (developed by [Julien-R44]((https://github.com/Julien-R44), written in Rust).
+You are looking at the Python 3.10+ version.
 
-Notes:
-1. Not yet released (waiting on issue #1)
-2. Not tested on macOS
-3. Not tested on Windows (it will likely fail to render colors)
+Note: not tested on macOS, nor Windows (it will likely fail to render colors).
 
 **Table of contents**:
 - [Python Candlesticks Chart](#python-candlesticks-chart)
@@ -27,9 +25,10 @@ Notes:
 
 - Auto-fit to terminal size
 - Practical formatting for big, and tiny, numbers
+- Integration with [Textual](https://github.com/Textualize/textual) (upcoming), and [Rich](https://github.com/Textualize/rich)
 - Simple, yet customizable, API
 - Exact same API as the [Rust version](https://github.com/Julien-R44/cli-candlestick-chart)
-- Installation simple, no external dependencies
+- Simple installation, no external dependencies
 
 ## Intallation
 
@@ -62,6 +61,12 @@ chart.set_bear_color(1, 205, 254)
 chart.set_bull_color(255, 107, 153)
 chart.set_vol_bull_color(1, 205, 254)
 chart.set_vol_bear_color(255, 107, 153)
+
+# Set custom labels (empty string: label not displayed)
+chart.set_label("highest", "ATH")
+chart.set_label("lowest", "ATL")
+chart.set_label("average", "")
+chart.set_label("volume", "")
 
 chart.set_volume_pane_height(6)
 chart.set_volume_pane_enabled(False)
@@ -122,7 +127,8 @@ For all requests, here are supported fields:
 - [Basic example with CSV parsing](examples/basic-from-csv-file.py): run with `$ python examples/basic-from-csv-file.py`
 - [Basic example with JSON parsing](examples/basic-from-json-file.py): run with `$ python examples/basic-from-json-file.py`
 - [Basic example with stdin parsing](examples/basic-from-stdin.sh): run with `$ ./examples/basic-from-stdin.sh`
-- [Fetch candles from Binance](examples/fetch-from-binance.py): run with `$ python fetch-from-binance.py`
+- [Fetch candles from Binance](examples/fetch-from-binance.py): run with `$ python examples/fetch-from-binance.py`
+- [Integration with Rich](examples/integrate-with-rich.py): run with `$ python examples/integrate-with-rich.py`
 
 ## Binary 
 

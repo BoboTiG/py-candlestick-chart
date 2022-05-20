@@ -2,22 +2,22 @@ from math import ceil, floor
 from typing import TYPE_CHECKING, List
 
 from .candle import CandleType, Candle
+from .constants import (
+    UNICODE_VOID,
+    UNICODE_BODY,
+    UNICODE_HALF_BODY_BOTTOM,
+    UNICODE_HALF_BODY_TOP,
+    UNICODE_WICK,
+    UNICODE_TOP,
+    UNICODE_BOTTOM,
+    UNICODE_WICK_UPPER,
+    UNICODE_WICK_LOWER,
+)
 from .colors import truecolor
 from .y_axis import YAxis
 
 if TYPE_CHECKING:
     from .chart import Chart
-
-MARGIN_TOP: int = 3
-UNICODE_VOID: str = " "
-UNICODE_BODY: str = "┃"
-UNICODE_HALF_BODY_BOTTOM: str = "╻"
-UNICODE_HALF_BODY_TOP: str = "╹"
-UNICODE_WICK: str = "│"
-UNICODE_TOP: str = "╽"
-UNICODE_BOTTOM: str = "╿"
-UNICODE_UPPER_WICK: str = "╷"
-UNICODE_LOWER_WICK: str = "╵"
 
 
 class ChartRenderer:
@@ -53,7 +53,7 @@ class ChartRenderer:
             elif high_y - height_unit > 0.75:
                 output = UNICODE_WICK
             elif high_y - height_unit > 0.25:
-                output = UNICODE_UPPER_WICK
+                output = UNICODE_WICK_UPPER
         elif float(max_y) >= height_unit >= ceil(min_y):
             output = UNICODE_BODY
         elif ceil(min_y) >= height_unit >= floor(low_y):
@@ -67,11 +67,11 @@ class ChartRenderer:
             elif low_y - height_unit < 0.25:
                 output = UNICODE_WICK
             elif low_y - height_unit < 0.75:
-                output = UNICODE_LOWER_WICK
+                output = UNICODE_WICK_LOWER
 
         return self.colorize(candle.get_type(), output)
 
-    def render(self, chart: "Chart") -> None:
+    def render(self, chart: "Chart") -> str:
         output: List[str] = []
         chart_data = chart.chart_data
         chart_data.compute_height(chart.volume_pane)
@@ -92,4 +92,4 @@ class ChartRenderer:
                 )
 
         output.append(chart.info_bar.render())
-        print("".join(output))
+        return "".join(output)

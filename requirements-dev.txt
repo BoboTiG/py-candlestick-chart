@@ -3,4 +3,5 @@ flake8
 mypy
 pytest
 requests
+rich
 types-requests

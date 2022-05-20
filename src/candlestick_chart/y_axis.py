@@ -1,15 +1,11 @@
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
+from .constants import CHAR_PRECISION, DEC_PRECISION, MARGIN_RIGHT
 from .utils import fnum
 
 if TYPE_CHECKING:
     from .chart_data import ChartData
-
-CHAR_PRECISION: int = 6
-DEC_PRECISION: int = 2
-MARGIN_RIGHT: int = 4
-WIDTH: int = CHAR_PRECISION + MARGIN_RIGHT + 1 + DEC_PRECISION + MARGIN_RIGHT
 
 
 @dataclass
