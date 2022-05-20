@@ -28,5 +28,5 @@ class ChartData:
     def compute_visible_candles(self) -> None:
         nb_visible_candles = self.width - y_axis.WIDTH
         self.visible_candle_set.set_candles(
-            self.main_candle_set.candles[:nb_visible_candles]
+            self.main_candle_set.candles[-nb_visible_candles:]
         )
