@@ -46,12 +46,12 @@ def get_args() -> Namespace:
 def main() -> int:
     options = get_args()
 
-    if options.mode == "stdin":
-        candles = parse_candles_from_stdin()
-    elif options.mode == "csv-file":
+    if options.mode == "csv-file":
         candles = parse_candles_from_csv(options.file)
-    else:  # json-file
+    elif options.mode == "json-file":
         candles = parse_candles_from_json(options.file)
+    else:  # stdin
+        candles = parse_candles_from_stdin()
 
     chart = Chart(candles, title=options.chart_name)
 
