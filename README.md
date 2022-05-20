@@ -4,10 +4,14 @@
 
 ![Preview](examples/screenshot.png)
 
-This is a portage from the great [cli-candlestick-chart](https://github.com/Julien-R44/cli-candlestick-chart) (written in Rust). You are looking at the Python 3.10+ version.
+This is a portage from the great [cli-candlestick-chart](https://github.com/Julien-R44/cli-candlestick-chart) (developed by @Julien-R44, written in Rust). You are looking at the Python 3.10+ version.
 
-Note: not tested on macOS, nor Windows; it will likely fail to render colors on the latter.
+Notes:
+1. Not yet released (waiting on issue #1)
+2. Not tested on macOS
+3. Not tested on Windows (it will likely fail to render colors)
 
+**Table of contents**:
 - [Python Candlesticks Chart](#python-candlesticks-chart)
   - [Features](#features)
   - [Intallation](#intallation)
@@ -22,10 +26,10 @@ Note: not tested on macOS, nor Windows; it will likely fail to render colors on 
 ## Features
 
 - Auto-fit to terminal size
-- Numbers formatting for big, and tiny, values
+- Practical formatting for big, and tiny, numbers
 - Simple, yet customizable, API
-- Exact same API as the Rust version
-- Installation made simple, no external dependencies required
+- Exact same API as the [Rust version](https://github.com/Julien-R44/cli-candlestick-chart)
+- Installation simple, no external dependencies
 
 ## Intallation
 
@@ -67,7 +71,7 @@ chart.draw()
 
 # Binary Usage
 
-When installing the library, a standalone executable is made available (`candlestick-chart`):
+When installing the library, an executable is made available (`candlestick-chart`):
 
 ```bash
 $ candlestick-chart --help             
@@ -86,9 +90,7 @@ options:
   --version             show program's version number and exit
 ```
 
-When requesting the CSV file mode, the library expects a CSV file with at least `open,high,low,close` headers fields.
-
-When requesting the JSON or stdin mode, the library expects a JSON with the following format : 
+When requesting the JSON or stdin mode, the library expects a JSON with the following format: 
 
 ```json
 [
@@ -96,11 +98,21 @@ When requesting the JSON or stdin mode, the library expects a JSON with the foll
         "open": 28994.009766,
         "high": 29600.626953,
         "low": 28803.585938,
-        "close": 29374.152344,
-        "volume": 13456 // Optional 
+        "close": 29374.152344
     },
     ...
 ]
+```
+
+For all requests, here are supported fields:
+
+```python
+"open": float  # mandatory
+"close": float  # mandatory
+"high": float  # mandatory
+"low": float  # mandatory
+"volume": float
+"timestamp": float
 ```
 
 # Examples
