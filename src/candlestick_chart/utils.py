@@ -10,7 +10,8 @@ FORMAT_NUMBER_REGEX = re.compile(r"(0\.)(0{4,})(.{4}).*")
 
 
 def fnum_replace_consecutive_zeroes(match: Match[str]) -> str:
-    return "".join([match[0], f"⦗0×{len(match[1])}⦘", match[3]])
+    p1, p2, p3 = match.groups()
+    return "".join([p1, f"⦗0×{len(p2)}⦘", p3])
 
 
 @cache
@@ -25,7 +26,7 @@ def fnum(value: int | float | str) -> str:
     if not value or abs(value) > 1:
         return f"{value:,}" if isinstance(value, int) else f"{value:,.2f}"
 
-    # 0.000000000012345678 -> 0.⦗0×10)1234
+    # 0.000000000012345678 -> 0.⦗0×10⦘1234
     formatted = FORMAT_NUMBER_REGEX.sub(
         fnum_replace_consecutive_zeroes, f"{value:.18f}"
     )
