@@ -1,6 +1,7 @@
+from io import StringIO
 import pytest
 
-from candlestick_chart import utils
+from candlestick_chart import Candle, utils
 
 
 @pytest.mark.parametrize(
@@ -29,3 +30,98 @@ def test_fnum(value, expected):
     assert utils.fnum(str(value)) == expected
     if value != 0.0:
         assert utils.fnum(value * -1) == f"-{expected}"
+
+
+@pytest.mark.parametrize(
+    "code, expected",
+    [
+        ("#b967ff", (185, 103, 255)),
+        ("ff6b99", (255, 107, 153)),
+    ],
+)
+def test_hexa_to_rgb(code, expected):
+    assert utils.hexa_to_rgb(code) == expected
+
+
+def test_parse_candles_from_csv(data):
+    file = data / "BTC-USD.csv"
+    candles = utils.parse_candles_from_csv(file)
+    assert len(candles) == 312
+    assert candles[0] == Candle(
+        open=28994.009766,
+        close=29374.152344,
+        high=29600.626953,
+        low=28803.585938,
+        volume=40730301359.0,
+        timestamp=1652997600.0,
+    )
+    assert candles[-1] == Candle(
+        open=63344.066406,
+        close=67566.828125,
+        high=67673.742188,
+        low=63344.066406,
+        volume=41125608330.0,
+        timestamp=1679868000.0,
+    )
+
+
+def test_parse_candles_from_json(data):
+    file = data / "BTC-chart.json"
+    candles = utils.parse_candles_from_json(file)
+    assert len(candles) == 2
+    assert candles[0] == Candle(
+        open=28994.009766,
+        close=29374.152344,
+        high=29600.626953,
+        low=28803.585938,
+        volume=0.0,
+        timestamp=0.0,
+    )
+    assert candles[1] == Candle(
+        open=29376.455078,
+        close=32127.267578,
+        high=33155.117188,
+        low=29091.181641,
+        volume=0.0,
+        timestamp=0.0,
+    )
+
+
+def test_parse_candles_from_stdin(monkeypatch):
+    monkeypatch.setattr(
+        "sys.stdin",
+        StringIO(
+            """[
+                {
+                    "open": 28994.009766,
+                    "high": 29600.626953,
+                    "low": 28803.585938,
+                    "close": 29374.152344
+                },
+                {
+                    "open": 29376.455078,
+                    "high": 33155.117188,
+                    "low": 29091.181641,
+                    "close": 32127.267578
+                }
+            ]"""
+        ),
+    )
+    candles = utils.parse_candles_from_stdin()
+    assert len(candles) == 2
+    assert candles[0] == Candle(
+        open=28994.009766,
+        close=29374.152344,
+        high=29600.626953,
+        low=28803.585938,
+        volume=0.0,
+        timestamp=0.0,
+    )
+    assert candles[1] == Candle(
+        open=29376.455078,
+        close=32127.267578,
+        high=33155.117188,
+        low=29091.181641,
+        volume=0.0,
+        timestamp=0.0,
+    )

@@ -1,7 +1,7 @@
 import re
 from functools import cache
 from pathlib import Path
-from typing import Match, Tuple
+from typing import Any, Iterator, Match, Tuple
 
 from .candle import Candle, Candles
 
@@ -45,23 +45,25 @@ def hexa_to_rgb(hex_code: str) -> Tuple[int, int, int]:
     return r, g, b
 
 
+def make_candles(iterator: Iterator[Any]) -> Candles:
+    return [Candle(**item) for item in iterator]
+
+
 def parse_candles_from_csv(file: str) -> Candles:
     import csv
 
     with Path(file).open() as fh:
-        return [Candle(**item) for item in csv.DictReader(fh)]  # type: ignore
+        return make_candles(csv.DictReader(fh))
 
 
 def parse_candles_from_json(file: str) -> Candles:
     import json
 
-    data = Path(file).read_text()
-    return [Candle(**item) for item in json.loads(data)]
+    return make_candles(json.loads(Path(file).read_text()))
 
 
 def parse_candles_from_stdin() -> Candles:
     import sys
     import json
 
-    data = "".join(sys.stdin)
-    return [Candle(**item) for item in json.loads(data)]
+    return make_candles(json.loads("".join(sys.stdin)))
