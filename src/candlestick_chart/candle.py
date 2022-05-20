@@ -11,9 +11,9 @@ class CandleType(IntEnum):
 @dataclass(slots=True)
 class Candle:
     open: float
+    close: float
     high: float
     low: float
-    close: float
     volume: float = 0.0
     timestamp: float = 0.0
 
