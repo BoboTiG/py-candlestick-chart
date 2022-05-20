@@ -2,6 +2,7 @@ from math import ceil, floor
 from typing import TYPE_CHECKING, List
 
 from .candle import CandleType, Candle
+from .colors import truecolor
 from .constants import (
     UNICODE_VOID,
     UNICODE_BODY,
@@ -13,7 +14,6 @@ from .constants import (
     UNICODE_WICK_UPPER,
     UNICODE_WICK_LOWER,
 )
-from .colors import truecolor
 from .y_axis import YAxis
 
 if TYPE_CHECKING:
@@ -25,13 +25,13 @@ class ChartRenderer:
         self.bearish_color = (234, 74, 90)
         self.bullish_color = (52, 208, 88)
 
-    def colorize(self, candle_type: CandleType, string: str) -> str:
+    def colorize(self, candle_type: int, string: str) -> str:
         color = (
             self.bearish_color
-            if candle_type == CandleType.BEARISH
+            if candle_type == CandleType.bearish
             else self.bullish_color
         )
-        return truecolor(string, color)
+        return truecolor(string, *color)
 
     def render_candle(self, candle: Candle, y: int, y_axis: YAxis) -> str:
         height_unit = float(y)

@@ -1,4 +1,4 @@
-from typing import Tuple
+from functools import cache
 
 
 def bold(value: str) -> str:
@@ -13,8 +13,8 @@ def red(value: str) -> str:
     return f"\033[91m{value}\033[00m"
 
 
-def truecolor(value: str, rgb: Tuple[int, int, int]) -> str:
-    r, g, b = rgb
+@cache
+def truecolor(value: str, r: int, g: int, b: int) -> str:
     return f"\033[38;2;{r};{g};{b}m{value}\033[00m"
 
 

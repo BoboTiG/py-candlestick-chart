@@ -29,12 +29,12 @@ def main() -> int:
 
     candles = [
         Candle(
-            float(kline.open),
-            float(kline.close),
-            float(kline.high),
-            float(kline.low),
-            volume=float(kline.volume),
-            timestamp=float(kline.open_time),
+            open=kline.open,
+            close=kline.close,
+            high=kline.high,
+            low=kline.low,
+            volume=kline.volume,
+            timestamp=kline.open_time,
         )
         for kline in klines
     ]

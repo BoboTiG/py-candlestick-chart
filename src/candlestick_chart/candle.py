@@ -1,32 +1,24 @@
-from dataclasses import dataclass
-from enum import IntEnum
-from typing import List
+from typing import Any, List, NamedTuple
 
 
-class CandleType(IntEnum):
-    BEARISH = 0
-    BULLISH = 1
+class CandleType(NamedTuple):
+    bearish: int = 0
+    bullish: int = 1
 
 
-@dataclass(slots=True)
 class Candle:
-    open: float
-    close: float
-    high: float
-    low: float
-    volume: float = 0.0
-    timestamp: float = 0.0
+    __slots__ = ("open", "close", "high", "low", "volume", "timestamp")
 
-    def __post_init__(self) -> None:
-        self.open = float(self.open)
-        self.high = float(self.high)
-        self.low = float(self.low)
-        self.close = float(self.close)
-        self.volume = float(self.volume)
-        self.timestamp = float(self.timestamp)
+    def __init__(self, **kwargs: Any) -> None:
+        self.open = float(kwargs["open"])
+        self.high = float(kwargs["high"])
+        self.low = float(kwargs["low"])
+        self.close = float(kwargs["close"])
+        self.volume = float(kwargs.get("volume", 0.0))
+        self.timestamp = float(kwargs.get("timestamp", 0.0))
 
-    def get_type(self) -> CandleType:
-        return CandleType.BULLISH if self.open < self.close else CandleType.BEARISH
+    def get_type(self) -> int:
+        return CandleType.bullish if self.open < self.close else CandleType.bearish
 
 
 Candles = List[Candle]
