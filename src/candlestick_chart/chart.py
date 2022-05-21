@@ -33,25 +33,15 @@ class Chart:
             options.max_width or console.width,
             options.height or console.height,
         )
-        yield Group(*AnsiDecoder().decode(self.render()))
+        yield Group(*AnsiDecoder().decode(self._render()))
 
-    def draw(self) -> None:
-        """Draws the chart by outputting multiples strings in the terminal."""
-        print(self.render())
-
-    def render(self) -> str:
+    def _render(self) -> str:
         """Get the full chart as a single string."""
         return self.renderer.render(self)
 
-    def set_label(self, label: str, value: str) -> None:
-        """Set the info bar `label` text with `value`.
-        An empty string will disable its display.
-        """
-        setattr(self.info_bar.labels, label, value)
-
-    def set_name(self, name: str) -> None:
-        """Set the name of the chart in the info bar."""
-        self.info_bar.name = name
+    def draw(self) -> None:
+        """Draws the chart by outputting multiples strings in the terminal."""
+        print(self._render())
 
     def set_bear_color(self, r: int, g: int, b: int) -> None:
         """Set the color of the bearish candle.
@@ -64,6 +54,16 @@ class Chart:
         The default color is  (52, 208, 88).
         """
         self.renderer.bullish_color = r, g, b
+
+    def set_label(self, label: str, value: str) -> None:
+        """Set the info bar `label` text with `value`.
+        An empty string will disable its display.
+        """
+        setattr(self.info_bar.labels, label, value)
+
+    def set_name(self, name: str) -> None:
+        """Set the name of the chart in the info bar."""
+        self.info_bar.name = name
 
     def set_vol_bear_color(self, r: int, g: int, b: int) -> None:
         """Sets the color of the volume when the candle is bearish.
@@ -81,15 +81,15 @@ class Chart:
         """Hide or show the volume pane."""
         self.volume_pane.enabled = enabled
 
-    def set_volume_pane_unicode_fill(self, unicode_fill: str) -> None:
-        """Set the character for drawing the volume bars."""
-        self.volume_pane.unicode_fill = unicode_fill
-
     def set_volume_pane_height(self, height: int) -> None:
         """Set the volume pane height.
         Default is 1/6 of the terminal height.
         """
         self.volume_pane.height = height
+
+    def set_volume_pane_unicode_fill(self, unicode_fill: str) -> None:
+        """Set the character for drawing the volume bars."""
+        self.volume_pane.unicode_fill = unicode_fill
 
     def update_size(self, width: int, height: int) -> None:
         """Adapt chart width, and height. Yes, it is responsive too!"""
