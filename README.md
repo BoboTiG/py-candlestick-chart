@@ -68,8 +68,14 @@ chart.set_label("lowest", "ATL")
 chart.set_label("average", "")
 chart.set_label("volume", "")
 
+# Volume pane settings
 chart.set_volume_pane_height(6)
 chart.set_volume_pane_enabled(False)
+
+# And, it is also responsive!
+new_width = 200
+new_height = 150
+chart.update_size(new_width, new_height)
 
 chart.draw()
 ```

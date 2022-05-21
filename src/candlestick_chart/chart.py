@@ -1,9 +1,14 @@
+from typing import TYPE_CHECKING, Iterable
+
 from .candle import Candles
 from .chart_data import ChartData
 from .chart_renderer import ChartRenderer
 from .info_bar import InfoBar
 from .volume_pane import VolumePane
 from .y_axis import YAxis
+
+if TYPE_CHECKING:
+    from rich.console import Console, ConsoleOptions
 
 
 class Chart:
@@ -18,6 +23,18 @@ class Chart:
         self.info_bar = InfoBar(title, self.chart_data)
         self.volume_pane = VolumePane(self.chart_data, int(self.chart_data.height / 6))
         self.chart_data.compute_height(self.volume_pane)
+
+    def __rich_console__(
+        self, console: "Console", options: "ConsoleOptions"
+    ) -> Iterable[str]:
+        from rich.ansi import AnsiDecoder
+        from rich.console import Group
+
+        self.update_size(
+            options.max_width or console.width,
+            options.height or console.height,
+        )
+        yield Group(*AnsiDecoder().decode(self.render()))
 
     def draw(self) -> None:
         """Draws the chart by outputting multiples strings in the terminal."""
@@ -74,3 +91,12 @@ class Chart:
         Default is 1/6 of the terminal height.
         """
         self.volume_pane.height = height
+
+    def update_size(self, width: int, height: int) -> None:
+        """Adapt chart width, and height. Yes, it is responsive too!"""
+        if (width, height) == self.chart_data.terminal_size:
+            return
+
+        self.chart_data.set_size(width, height)
+        if self.volume_pane.enabled:
+            self.set_volume_pane_height(int(self.chart_data.height / 6))
