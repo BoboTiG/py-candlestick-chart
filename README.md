@@ -4,7 +4,7 @@
 
 ![Preview](examples/screenshot.png)
 
-This is a portage from the great [cli-candlestick-chart](https://github.com/Julien-R44/cli-candlestick-chart) (developed by [Julien-R44]((https://github.com/Julien-R44), written in Rust).
+This is a portage from the great [cli-candlestick-chart](https://github.com/Julien-R44/cli-candlestick-chart) (developed by [Julien-R44](https://github.com/Julien-R44), written in Rust).
 You are looking at the Python 3.10+ version.
 
 Note: not tested on macOS, nor Windows (it will likely fail to render colors).
@@ -25,9 +25,9 @@ Note: not tested on macOS, nor Windows (it will likely fail to render colors).
 
 - Auto-fit to terminal size
 - Practical formatting for big, and tiny, numbers
-- Integration with [Textual](https://github.com/Textualize/textual) (upcoming), and [Rich](https://github.com/Textualize/rich)
+- Integration with [Rich](https://github.com/Textualize/rich)
 - Simple, yet customizable, API
-- Exact same API as the [Rust version](https://github.com/Julien-R44/cli-candlestick-chart)
+- Exact same API as the [Rust version](https://github.com/Julien-R44/cli-candlestick-chart), plus some sugar
 - Simple installation, no external dependencies
 
 ## Intallation
@@ -62,7 +62,7 @@ chart.set_bull_color(255, 107, 153)
 chart.set_vol_bull_color(1, 205, 254)
 chart.set_vol_bear_color(255, 107, 153)
 
-# Set custom labels (empty string: label not displayed)
+# Set custom labels (empty string => label not displayed)
 chart.set_label("highest", "ATH")
 chart.set_label("lowest", "ATL")
 chart.set_label("average", "")
@@ -137,20 +137,20 @@ For all requests, here are supported fields:
 ```bash
 $ candlestick-chart \
     --mode=csv-file \
-    -f=./examples/BTC-USD.csv \
-    --chart-name="My BTC Chart" \
-    --bear-color="#b967ff" \
-    --bull-color="ff6b99"
+    --file='./examples/BTC-USD.csv' \
+    --chart-name='My BTC Chart' \
+    --bear-color='#b967ff' \
+    --bull-color='ff6b99'
 ```
 ### Read JSON from file
 
 ```bash
 $ candlestick-chart \
     --mode=json-file \
-    -f=./examples/BTC-chart.json \
-    --chart-name="My BTC Chart" \
-    --bear-color="#b967ff" \
-    --bull-color="ff6b99"
+    --file='./examples/BTC-chart.json' \
+    --chart-name='My BTC Chart' \
+    --bear-color='#b967ff' \
+    --bull-color='ff6b99'
 ```
 
 ### Read from stdin
@@ -171,7 +171,7 @@ echo '[
   }
 ]' | candlestick-chart \
     --mode=stdin \
-    --chart-name="My BTC Chart" \
-    --bear-color="#b967ff" \
-    --bull-color="ff6b99"
+    --chart-name='My BTC Chart' \
+    --bear-color='#b967ff' \
+    --bull-color='ff6b99'
 ```
