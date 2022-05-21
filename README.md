@@ -82,8 +82,7 @@ new_height = 150
 chart.update_size(new_width, new_height)
 
 # By the way, did you know that you can update candles in real-time?
-# Ex: take the first 100 candles
-chart.update_candles(candles[:100])
+chart.update_candles(candles[:3])
 
 chart.draw()
 ```
