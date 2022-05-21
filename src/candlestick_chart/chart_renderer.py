@@ -73,22 +73,23 @@ class ChartRenderer:
         output: List[str] = []
         chart_data = chart.chart_data
         chart_data.compute_height(chart.volume_pane)
+        candle_set = chart_data.visible_candle_set
+        candles = candle_set.candles
 
-        candles = chart_data.visible_candle_set.candles
         render_line = chart.y_axis.render_line
-
         for y in range(chart_data.height, 0, -1):
             output.extend(("\n", render_line(y)))
             output.extend(
                 self._render_candle(candle, y, chart.y_axis) for candle in candles
             )
 
-        if chart.volume_pane.enabled:
+        if chart.volume_pane.enabled and candle_set.max_volume:
             render_empty = chart.y_axis.render_empty
             render = chart.volume_pane.render
+            max_volume = candle_set.max_volume
             for y in range(chart.volume_pane.height, 0, -1):
                 output.extend(("\n", render_empty()))
-                output.extend(render(candle, y) for candle in candles)
+                output.extend(render(candle, y, max_volume) for candle in candles)
 
-        output.append(chart.info_bar.render())
+        output.append(chart.info_bar.render(candle_set))
         return "".join(output)

@@ -20,9 +20,8 @@ class Chart:
         self.renderer = ChartRenderer()
         self.chart_data = ChartData(candles, width=width, height=height)
         self.y_axis = YAxis(self.chart_data)
-        self.info_bar = InfoBar(title, self.chart_data)
-        self.volume_pane = VolumePane(self.chart_data, int(self.chart_data.height / 6))
-        self.chart_data.compute_height(self.volume_pane)
+        self.info_bar = InfoBar(title)
+        self.volume_pane = VolumePane(int(self.chart_data.height / 6))
 
     def __rich_console__(
         self, console: "Console", options: "ConsoleOptions"
@@ -98,5 +97,7 @@ class Chart:
             return
 
         self.chart_data.set_size(width, height)
+        self.chart_data.compute_visible_candles()
+
         if self.volume_pane.enabled:
             self.set_volume_pane_height(int(self.chart_data.height / 6))

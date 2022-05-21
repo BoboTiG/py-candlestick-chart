@@ -7,14 +7,12 @@ from .constants import LABELS, WIDTH
 from .utils import fnum
 
 if TYPE_CHECKING:
-    from .chart_data import ChartData
     from .candle_set import CandleSet
 
 
 @dataclass(slots=True)
 class InfoBar:
     name: str
-    chart_data: "ChartData"
     labels = copy(LABELS)
 
     def _render_average(self, candle_set: "CandleSet") -> str:
@@ -67,8 +65,7 @@ class InfoBar:
             else ""
         )
 
-    def render(self) -> str:
-        candle_set = self.chart_data.visible_candle_set
+    def render(self, candle_set: "CandleSet") -> str:
         return "".join(
             (
                 "\n",
