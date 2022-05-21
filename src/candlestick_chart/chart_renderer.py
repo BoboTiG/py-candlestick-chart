@@ -36,39 +36,36 @@ class ChartRenderer:
 
     def _render_candle(self, candle: Candle, y: int, y_axis: YAxis) -> str:
         height_unit = float(y)
-        high_y = y_axis.price_to_height(candle.high)
-        low_y = y_axis.price_to_height(candle.low)
-        max_y = y_axis.price_to_height(max(candle.open, candle.close))
-        min_y = y_axis.price_to_height(min(candle.open, candle.close))
-
+        high_y, low_y, max_y, min_y = y_axis.price_to_heights(candle)
         output = UNICODE_VOID
 
-        if ceil(high_y) >= height_unit >= floor(max_y):
-            if max_y - height_unit > 0.75:
+        ceil_ = ceil
+        floor_ = floor
+
+        if ceil_(high_y) >= height_unit >= floor_(max_y):
+            max_diff = max_y - height_unit
+            high_diff = high_y - height_unit
+            if max_diff > 0.75:
                 output = UNICODE_BODY
-            elif max_y - height_unit > 0.25:
-                if high_y - height_unit > 0.75:
-                    output = UNICODE_TOP
-                else:
-                    output = UNICODE_HALF_BODY_BOTTOM
-            elif high_y - height_unit > 0.75:
+            elif max_diff > 0.25:
+                output = UNICODE_TOP if high_diff > 0.75 else UNICODE_HALF_BODY_BOTTOM
+            elif high_diff > 0.75:
                 output = UNICODE_WICK
-            elif high_y - height_unit > 0.25:
+            elif high_diff > 0.25:
                 output = UNICODE_WICK_UPPER
-        elif float(max_y) >= height_unit >= ceil(min_y):
-            output = UNICODE_BODY
-        elif ceil(min_y) >= height_unit >= floor(low_y):
-            if min_y - height_unit < 0.25:
+        elif ceil_(min_y) >= height_unit >= floor_(low_y):
+            min_diff = min_y - height_unit
+            low_diff = low_y - height_unit
+            if min_diff < 0.25:
                 output = UNICODE_BODY
-            elif min_y - height_unit < 0.75:
-                if low_y - height_unit < 0.25:
-                    output = UNICODE_BOTTOM
-                else:
-                    output = UNICODE_HALF_BODY_TOP
-            elif low_y - height_unit < 0.25:
+            elif min_diff < 0.75:
+                output = UNICODE_BOTTOM if low_diff < 0.25 else UNICODE_HALF_BODY_TOP
+            elif low_diff < 0.25:
                 output = UNICODE_WICK
-            elif low_y - height_unit < 0.75:
+            elif low_diff < 0.75:
                 output = UNICODE_WICK_LOWER
+        elif max_y >= height_unit >= ceil_(min_y):
+            output = UNICODE_BODY
 
         return self._colorize(candle.type, output)
 
@@ -77,20 +74,21 @@ class ChartRenderer:
         chart_data = chart.chart_data
         chart_data.compute_height(chart.volume_pane)
 
+        candles = chart_data.visible_candle_set.candles
+        render_line = chart.y_axis.render_line
+
         for y in range(chart_data.height, 0, -1):
-            output.extend(("\n", chart.y_axis.render_line(y)))
+            output.extend(("\n", render_line(y)))
             output.extend(
-                self._render_candle(candle, y, chart.y_axis)
-                for candle in chart_data.visible_candle_set.candles
+                self._render_candle(candle, y, chart.y_axis) for candle in candles
             )
 
         if chart.volume_pane.enabled:
+            render_empty = chart.y_axis.render_empty
+            render = chart.volume_pane.render
             for y in range(chart.volume_pane.height, 0, -1):
-                output.extend(("\n", chart.y_axis.render_empty()))
-                output.extend(
-                    chart.volume_pane.render(candle, y)
-                    for candle in chart_data.visible_candle_set.candles
-                )
+                output.extend(("\n", render_empty()))
+                output.extend(render(candle, y) for candle in candles)
 
         output.append(chart.info_bar.render())
         return "".join(output)

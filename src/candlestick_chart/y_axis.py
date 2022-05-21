@@ -1,6 +1,7 @@
 from dataclasses import dataclass
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Tuple
 
+from .candle import Candle
 from .constants import CHAR_PRECISION, DEC_PRECISION, MARGIN_RIGHT
 from .utils import fnum
 
@@ -12,13 +13,22 @@ if TYPE_CHECKING:
 class YAxis:
     chart_data: "ChartData"
 
-    def price_to_height(self, price: float) -> float:
+    def price_to_heights(self, candle: Candle) -> Tuple[float, ...]:
         chart_data = self.chart_data
         height = chart_data.height
+        candle_set = chart_data.visible_candle_set
 
-        min_value = chart_data.visible_candle_set.min_price
-        max_value = chart_data.visible_candle_set.max_price
-        return (price - min_value) / (max_value - min_value) * height
+        min_open = candle.open if candle.open < candle.close else candle.close
+        max_open = candle.open if candle.open > candle.close else candle.close
+        min_value = candle_set.min_price
+        diff = candle_set.max_price - min_value
+
+        return (
+            (candle.high - min_value) / diff * height,  # high_y
+            (candle.low - min_value) / diff * height,  # low_y
+            (max_open - min_value) / diff * height,  # max_y
+            (min_open - min_value) / diff * height,  # min_y
+        )
 
     def render_line(self, y: int) -> str:
         return self.render_empty() if y % 4 else self._render_tick(y)
