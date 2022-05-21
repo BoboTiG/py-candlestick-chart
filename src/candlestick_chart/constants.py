@@ -2,7 +2,7 @@ from types import SimpleNamespace
 
 # Info bar labels
 # Labels can be customized via `Chart.set_label("label", "value")`
-# (set a label to an empty string will hide it from the chart)
+# (setting a label to an empty string will hide it from the chart)
 LABELS = SimpleNamespace(
     average="Avg.",
     currency="",

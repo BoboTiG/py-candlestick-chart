@@ -7,6 +7,8 @@ from .y_axis import YAxis
 
 
 class Chart:
+    __slots__ = ("chart_data", "info_bar", "renderer", "volume_pane", "y_axis")
+
     def __init__(
         self, candles: Candles, title: str = "My chart", width: int = 0, height: int = 0
     ) -> None:

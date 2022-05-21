@@ -11,13 +11,13 @@ if TYPE_CHECKING:
     from .candle_set import CandleSet
 
 
-@dataclass
+@dataclass(slots=True)
 class InfoBar:
     name: str
     chart_data: "ChartData"
     labels = copy(LABELS)
 
-    def render_average(self, candle_set: "CandleSet") -> str:
+    def _render_average(self, candle_set: "CandleSet") -> str:
         if not self.labels.average:
             return ""
 
@@ -30,24 +30,27 @@ class InfoBar:
         )
         return f"{self.labels.average}: {color(fnum(candle_set.last_price))}"
 
-    def render_highest(self, candle_set: "CandleSet") -> str:
+    def _render_highest(self, candle_set: "CandleSet") -> str:
         return (
             f"{self.labels.highest}: {green(fnum(candle_set.max_price))}"
             if self.labels.highest
             else ""
         )
 
-    def render_lowest(self, candle_set: "CandleSet") -> str:
+    def _render_lowest(self, candle_set: "CandleSet") -> str:
         return (
             f"{self.labels.lowest}: {red(fnum(candle_set.min_price))}"
             if self.labels.lowest
             else ""
         )
 
-    def render_price(self, candle_set: "CandleSet") -> str:
-        return f"{self.labels.price}: {bold(green(fnum(candle_set.last_price)))} {self.labels.currency}"
+    def _render_price(self, candle_set: "CandleSet") -> str:
+        price = f"{self.labels.price}: {bold(green(fnum(candle_set.last_price)))}"
+        if self.labels.currency:
+            price += f" {self.labels.currency}"
+        return price
 
-    def render_variation(self, candle_set: "CandleSet") -> str:
+    def _render_variation(self, candle_set: "CandleSet") -> str:
         if not self.labels.variation:
             return ""
 
@@ -57,7 +60,7 @@ class InfoBar:
         )
         return f"{self.labels.variation}: {var}"
 
-    def render_volume(self, candle_set: "CandleSet") -> str:
+    def _render_volume(self, candle_set: "CandleSet") -> str:
         return (
             f"{self.labels.volume}: {green(fnum(int(candle_set.cumulative_volume)))}"
             if self.labels.volume
@@ -76,12 +79,12 @@ class InfoBar:
                         len,
                         (
                             f"{self.name:>{WIDTH + 3}}",
-                            self.render_price(candle_set),
-                            self.render_highest(candle_set),
-                            self.render_lowest(candle_set),
-                            self.render_variation(candle_set),
-                            self.render_average(candle_set),
-                            self.render_volume(candle_set),
+                            self._render_price(candle_set),
+                            self._render_highest(candle_set),
+                            self._render_lowest(candle_set),
+                            self._render_variation(candle_set),
+                            self._render_average(candle_set),
+                            self._render_volume(candle_set),
                         ),
                     )
                 ),

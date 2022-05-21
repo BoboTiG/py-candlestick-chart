@@ -7,6 +7,14 @@ from .volume_pane import VolumePane
 
 
 class ChartData:
+    __slots__ = (
+        "height",
+        "main_candle_set",
+        "terminal_size",
+        "visible_candle_set",
+        "width",
+    )
+
     def __init__(self, candles: Candles, width: int = 0, height: int = 0) -> None:
         if not width or not height:
             width, height = get_terminal_size()
@@ -16,13 +24,13 @@ class ChartData:
         self.main_candle_set = CandleSet(candles)
         self.visible_candle_set = CandleSet([])
 
-        self.compute_visible_candles()
+        self._compute_visible_candles()
 
     def compute_height(self, volume_pane: VolumePane) -> None:
         volume_pane_height = volume_pane.height if volume_pane.enabled else 0
         self.height = self.terminal_size[1] - MARGIN_TOP - HEIGHT - volume_pane_height
 
-    def compute_visible_candles(self) -> None:
+    def _compute_visible_candles(self) -> None:
         nb_visible_candles = self.width - WIDTH
         self.visible_candle_set.set_candles(
             self.main_candle_set.candles[-nb_visible_candles:]

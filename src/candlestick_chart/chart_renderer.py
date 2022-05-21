@@ -1,5 +1,6 @@
+from dataclasses import dataclass
 from math import ceil, floor
-from typing import TYPE_CHECKING, List
+from typing import TYPE_CHECKING, List, Tuple
 
 from .candle import CandleType, Candle
 from .colors import truecolor
@@ -20,12 +21,12 @@ if TYPE_CHECKING:
     from .chart import Chart
 
 
+@dataclass(slots=True)
 class ChartRenderer:
-    def __init__(self) -> None:
-        self.bearish_color = (234, 74, 90)
-        self.bullish_color = (52, 208, 88)
+    bearish_color: Tuple[int, int, int] = (234, 74, 90)
+    bullish_color: Tuple[int, int, int] = (52, 208, 88)
 
-    def colorize(self, candle_type: int, string: str) -> str:
+    def _colorize(self, candle_type: int, string: str) -> str:
         color = (
             self.bearish_color
             if candle_type == CandleType.bearish
@@ -33,7 +34,7 @@ class ChartRenderer:
         )
         return truecolor(string, *color)
 
-    def render_candle(self, candle: Candle, y: int, y_axis: YAxis) -> str:
+    def _render_candle(self, candle: Candle, y: int, y_axis: YAxis) -> str:
         height_unit = float(y)
         high_y = y_axis.price_to_height(candle.high)
         low_y = y_axis.price_to_height(candle.low)
@@ -69,7 +70,7 @@ class ChartRenderer:
             elif low_y - height_unit < 0.75:
                 output = UNICODE_WICK_LOWER
 
-        return self.colorize(candle.get_type(), output)
+        return self._colorize(candle.type, output)
 
     def render(self, chart: "Chart") -> str:
         output: List[str] = []
@@ -79,7 +80,7 @@ class ChartRenderer:
         for y in range(chart_data.height, 0, -1):
             output.extend(("\n", chart.y_axis.render_line(y)))
             output.extend(
-                self.render_candle(candle, y, chart.y_axis)
+                self._render_candle(candle, y, chart.y_axis)
                 for candle in chart_data.visible_candle_set.candles
             )
 
