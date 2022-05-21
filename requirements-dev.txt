@@ -5,3 +5,4 @@ pytest
 requests
 rich
 types-requests
+wheel
