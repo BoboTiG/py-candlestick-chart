@@ -51,6 +51,7 @@ candles = [
 ]
 
 # Create and display the chart
+# Optional keyword arguments: title, width, height
 chart = Chart(candles, title="Optional title")
 
 # Set the chart title
