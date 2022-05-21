@@ -13,6 +13,7 @@ Note: not tested on macOS, nor Windows (it will likely fail to render colors).
 - [Python Candlesticks Chart](#python-candlesticks-chart)
   - [Features](#features)
   - [Intallation](#intallation)
+  - [Demonstration](#demonstration)
 - [Binary Usage](#binary-usage)
 - [Examples](#examples)
   - [API](#api)
@@ -27,7 +28,7 @@ Note: not tested on macOS, nor Windows (it will likely fail to render colors).
 - Practical formatting for big, and tiny, numbers
 - Integration with [Rich](https://github.com/Textualize/rich)
 - Simple, yet customizable, API
-- Exact same API as the [Rust version](https://github.com/Julien-R44/cli-candlestick-chart), plus some sugar
+- Exact same API as the [Rust version](https://github.com/Julien-R44/cli-candlestick-chart), plus some [sugar](#demonstration)
 - Simple installation, no external dependencies
 
 ## Intallation
@@ -37,6 +38,8 @@ As simple as:
 ```bash
 $ python -m pip install -U candlestick-chart
 ```
+
+## Demonstration
 
 ```python
 from candlestick_chart import Candle, Chart
@@ -77,6 +80,10 @@ chart.set_volume_pane_enabled(False)
 new_width = 200
 new_height = 150
 chart.update_size(new_width, new_height)
+
+# By the way, did you know that you can update candles in real-time?
+# Ex: take the first 100 candles
+chart.update_candles(candles[:100])
 
 chart.draw()
 ```
