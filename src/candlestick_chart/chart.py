@@ -91,6 +91,12 @@ class Chart:
         """Set the character for drawing the volume bars."""
         self.volume_pane.unicode_fill = unicode_fill
 
+    def update_candles(self, candles: Candles) -> None:
+        """Convenient helper to update candles."""
+        self.chart_data.set_candles(candles)
+        self.chart_data.compute_visible_candles()
+        self.y_axis.chart_data = self.chart_data
+
     def update_size(self, width: int, height: int) -> None:
         """Adapt chart width, and height. Yes, it is responsive too!"""
         if (width, height) == self.chart_data.terminal_size:

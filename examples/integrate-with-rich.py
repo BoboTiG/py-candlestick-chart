@@ -1,5 +1,6 @@
 from time import sleep
 
+from candlestick_chart.candle import Candles
 from candlestick_chart.chart import Chart
 from candlestick_chart.utils import parse_candles_from_csv
 from rich.layout import Layout
@@ -14,22 +15,32 @@ def make_layout() -> Layout:
         Layout(name="main", ratio=1),
     )
     layout["main"].split_row(
-        Layout(name="candlesticks", size=120),
-        Layout(name="main_right"),
+        Layout(name="candlesticks-static"),
+        Layout(name="candlesticks-dynamic"),
     )
     return layout
 
 
+def make_chart(candles: Candles, nature: str) -> Chart:
+    chart = Chart(candles, title=f"Rich candlesticks {nature}!")
+    chart.set_bear_color(1, 205, 254)
+    chart.set_bull_color(255, 107, 153)
+    chart.set_label("average", "")
+    chart.set_label("volume", "")
+    return chart
+
+
 candles = parse_candles_from_csv("./examples/BTC-USD.csv")
-chart = Chart(candles, title="Rich candlesticks!")
-chart.set_bear_color(1, 205, 254)
-chart.set_bull_color(255, 107, 153)
-chart.set_label("average", "")
-chart.set_label("volume", "")
+chart_static = make_chart(candles, "static")
+chart_dynamic = make_chart([], "dynamic")
 
 layout = make_layout()
-layout["candlesticks"].update(Panel(chart))
+layout["candlesticks-static"].update(Panel(chart_static))
+layout["candlesticks-dynamic"].update(Panel(chart_dynamic))
 
-with Live(layout):
-    while True:
-        sleep(0.1)
+with Live(layout, refresh_per_second=120):
+    candles_count = 0
+    while candles_count <= len(candles):
+        chart_dynamic.update_candles(candles[:candles_count])
+        candles_count += 1
+        sleep(0.03)
