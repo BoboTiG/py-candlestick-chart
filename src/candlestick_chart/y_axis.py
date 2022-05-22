@@ -21,7 +21,7 @@ class YAxis:
         min_open = candle.open if candle.open < candle.close else candle.close
         max_open = candle.open if candle.open > candle.close else candle.close
         min_value = candle_set.min_price
-        diff = candle_set.max_price - min_value
+        diff = (candle_set.max_price - min_value) or 1
 
         return (
             (candle.high - min_value) / diff * height,  # high_y

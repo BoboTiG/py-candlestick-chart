@@ -11,10 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 
 
 ### Changed
-- 
+- Fixed a zero division error when min, and max, prices are equals inside a same candle (closes [#4])
 
 ### Removed
-- 
+-
+
 ## [2.0.0] - 2022-05-22
 
 ### Changed
@@ -33,3 +34,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [#2]: https://github.com/BoboTiG/py-candlestick-chart/issues/2
 [#3]: https://github.com/BoboTiG/py-candlestick-chart/issues/3
+[#4]: https://github.com/BoboTiG/py-candlestick-chart/issues/4
