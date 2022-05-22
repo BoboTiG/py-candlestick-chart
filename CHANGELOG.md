@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 ### Changed
+- Fixed values computation in the info bar by using the whole candle set rather thant only the visible one (closes [#2])
 
 ### Removed
 
@@ -22,3 +23,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [Unreleased]: https://github.com/BoboTiG/py-candlestick-chart/compare/v1.0.0...HEAD
 [1.0.0]: https://github.com/BoboTiG/py-candlestick-chart/tree/v1.0.0
+
+[2] https://github.com/BoboTiG/py-candlestick-chart/issues/2

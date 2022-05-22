@@ -65,11 +65,11 @@ class InfoBar:
             else ""
         )
 
-    def render(self, candle_set: "CandleSet") -> str:
+    def render(self, candle_set: "CandleSet", nb_visible_candle_set: int) -> str:
         return "".join(
             (
                 "\n",
-                "─" * (len(candle_set.candles) + WIDTH),
+                "─" * (nb_visible_candle_set + WIDTH),
                 "\n",
                 " | ".join(
                     filter(

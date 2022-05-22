@@ -91,5 +91,5 @@ class ChartRenderer:
                 output.extend(("\n", render_empty()))
                 output.extend(render(candle, y, max_volume) for candle in candles)
 
-        output.append(chart.info_bar.render(candle_set))
+        output.append(chart.info_bar.render(chart_data.main_candle_set, len(candles)))
         return "".join(output)
