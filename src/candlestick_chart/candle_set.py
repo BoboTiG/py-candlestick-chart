@@ -18,6 +18,10 @@ class CandleSet:
     def __post_init__(self) -> None:
         self._compute_all()
 
+    def add_candles(self, candles: Candles) -> None:
+        self.candles.extend(candles)
+        self._compute_all()
+
     def set_candles(self, candles: Candles) -> None:
         self.candles = candles
         self._compute_all()

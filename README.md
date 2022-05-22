@@ -81,8 +81,10 @@ new_width = 200
 new_height = 150
 chart.update_size(new_width, new_height)
 
-# By the way, did you know that you can update candles in real-time?
+# By the way, did you know that you can add more candles in real-time?
 chart.update_candles(candles[:3])
+# Or completely replace current candles
+chart.update_candles(candles[:3], reset=True)
 
 chart.draw()
 ```

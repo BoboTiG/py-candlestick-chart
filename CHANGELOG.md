@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Fixed values computation in the info bar by using the whole candle set rather thant only the visible one (closes [#2])
+- Changed the `Chart.update_candles()` behavior: it will update current candles by default, and now accepts a `reset=True` optional argument to actually erase all previous candles first (closes [#3])
 
 ### Removed
 
@@ -25,3 +26,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.0]: https://github.com/BoboTiG/py-candlestick-chart/tree/v1.0.0
 
 [2] https://github.com/BoboTiG/py-candlestick-chart/issues/2
+[#3]: https://github.com/BoboTiG/py-candlestick-chart/issues/3

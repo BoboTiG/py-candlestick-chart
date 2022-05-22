@@ -16,7 +16,8 @@ class ChartData:
     )
 
     def __init__(self, candles: Candles, width: int = 0, height: int = 0) -> None:
-        self.set_candles(candles)
+        self.main_candle_set = CandleSet(candles)
+        self.visible_candle_set = CandleSet([])
 
         if not width or not height:
             width, height = get_terminal_size()
@@ -34,9 +35,13 @@ class ChartData:
             self.main_candle_set.candles[-nb_visible_candles:][:]
         )
 
-    def set_candles(self, candles: Candles) -> None:
-        self.main_candle_set = CandleSet(candles)
-        self.visible_candle_set = CandleSet([])
+    def reset_candles(self) -> None:
+        self.main_candle_set.set_candles([])
+        self.visible_candle_set.set_candles([])
+
+    def add_candles(self, candles: Candles) -> None:
+        self.main_candle_set.add_candles(candles)
+        self.visible_candle_set.set_candles([])
 
     def set_size(self, width: int, height: int) -> None:
         self.terminal_size = width, height
