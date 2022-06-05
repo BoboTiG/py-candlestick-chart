@@ -11,8 +11,8 @@ from .constants import UNICODE_FILL, UNICODE_HALF_BODY_BOTTOM
 class VolumePane:
     height: int
     enabled: bool = True
-    bearish_color: Tuple[int, int, int] = (52, 208, 88)
-    bullish_color: Tuple[int, int, int] = (234, 74, 90)
+    bearish_color: Tuple[int, int, int] = (234, 74, 90)
+    bullish_color: Tuple[int, int, int] = (52, 208, 88)
     unicode_fill: str = UNICODE_FILL
 
     def _colorize(self, candle_type: int, string: str) -> str:

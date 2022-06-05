@@ -23,8 +23,8 @@ def make_layout() -> Layout:
 
 def make_chart(candles: Candles, nature: str) -> Chart:
     chart = Chart(candles, title=f"Rich candlesticks {nature}!")
-    chart.set_bear_color(1, 205, 254)
-    chart.set_bull_color(255, 107, 153)
+    chart.set_bear_color(255, 107, 153)
+    chart.set_bull_color(1, 205, 254)
     chart.set_label("average", "")
     chart.set_label("volume", "")
     return chart

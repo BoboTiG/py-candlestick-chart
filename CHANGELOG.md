@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Fixed a zero division error when min, and max, prices are equals inside a same candle (closes [#4])
 - Fixed small numbers display on the Y-axis (closes [#5])
+- Fixed bearish/bullish colors inversion in the volume pane
 
 ### Removed
 -
