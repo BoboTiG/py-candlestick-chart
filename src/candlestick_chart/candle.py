@@ -18,5 +18,18 @@ class Candle:
         self.timestamp = float(kwargs.get("timestamp", 0.0))
         self.type = CandleType.bullish if self.open < self.close else CandleType.bearish
 
+    def __repr__(self) -> str:
+        return (
+            f"{type(self).__name__}<"
+            f"open={self.open}, "
+            f"low={self.low}, "
+            f"high={self.high}, "
+            f"close={self.close}, "
+            f"volume={self.volume}, "
+            f"timestamp={self.timestamp}, "
+            f"type={'bullish' if self.type == CandleType.bullish else 'bearish'}"
+            ">"
+        )
+
 
 Candles = List[Candle]

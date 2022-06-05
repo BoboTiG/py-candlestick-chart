@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased] - 2022-05-22
 
 ### Added
-- 
+- Nice `Candle` Python representation
 
 ### Changed
 - Fixed a zero division error when min, and max, prices are equals inside a same candle (closes [#4])
