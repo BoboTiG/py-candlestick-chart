@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] - 2022-05-22
+## [2.1.0] - 2022-07-20
 
 ### Added
 - Nice `Candle` Python representation
@@ -14,9 +14,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed a zero division error when min, and max, prices are equals inside a same candle (closes [#4])
 - Fixed small numbers display on the Y-axis (closes [#5])
 - Fixed bearish/bullish colors inversion in the volume pane
-
-### Removed
--
 
 ## [2.0.0] - 2022-05-22
 
@@ -30,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - First version.
 
 
-[Unreleased]: https://github.com/BoboTiG/py-candlestick-chart/compare/v2.0.0...HEAD
+[2.1.0]: https://github.com/BoboTiG/py-candlestick-chart/tree/v2.1.0
 [2.0.0]: https://github.com/BoboTiG/py-candlestick-chart/tree/v2.0.0
 [1.0.0]: https://github.com/BoboTiG/py-candlestick-chart/tree/v1.0.0
 
