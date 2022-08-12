@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] - 2022-07-20
+## [2.2.0] - 2022-08-12
 
 ### Added
 - `Candle.__eq__()` to allow comparing candles
@@ -14,9 +14,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Constant changes are now taken into account in real-time, it allowes to tweak the chart appearence after having imported the module
 - Always show the volume pane when it is enabled
-
-### Removed
-- 
 
 ## [2.1.0] - 2022-07-20
 
@@ -40,7 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - First version.
 
 
-[Unreleased]: https://github.com/BoboTiG/py-candlestick-chart/compare/v2.1.0...HEAD
+[2.2.0]: https://github.com/BoboTiG/py-candlestick-chart/tree/v2.2.0
 [2.1.0]: https://github.com/BoboTiG/py-candlestick-chart/tree/v2.1.0
 [2.0.0]: https://github.com/BoboTiG/py-candlestick-chart/tree/v2.0.0
 [1.0.0]: https://github.com/BoboTiG/py-candlestick-chart/tree/v1.0.0
