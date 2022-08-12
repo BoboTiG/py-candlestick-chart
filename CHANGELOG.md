@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - `constants.PRECISION`, and `constants.PRECISION_SMALL` to control the number of decimals to keep when formatting numbers with `fnum()` (defaults to `2`, and `4`, respectively)
+- `constants.MIN_DIFF_THRESHOLD`, and `constants.MAX_DIFF_THRESHOLD` to control candle top, and bottom, thickness `fnum()` (defaults to `0.25`, and `0.75`, respectively)
 
 ### Changed
 - Fix formatting of `1.0` number within `fnum()`

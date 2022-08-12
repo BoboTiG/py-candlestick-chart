@@ -35,32 +35,32 @@ class ChartRenderer:
         if ceil_(high_y) >= height_unit >= floor_(max_y):
             max_diff = max_y - height_unit
             high_diff = high_y - height_unit
-            if max_diff > 0.75:
+            if max_diff > constants.MAX_DIFF_THRESHOLD:
                 output = constants.UNICODE_BODY
-            elif max_diff > 0.25:
+            elif max_diff > constants.MIN_DIFF_THRESHOLD:
                 output = (
                     constants.UNICODE_TOP
-                    if high_diff > 0.75
+                    if high_diff > constants.MAX_DIFF_THRESHOLD
                     else constants.UNICODE_HALF_BODY_BOTTOM
                 )
-            elif high_diff > 0.75:
+            elif high_diff > constants.MAX_DIFF_THRESHOLD:
                 output = constants.UNICODE_WICK
-            elif high_diff > 0.25:
+            elif high_diff > constants.MIN_DIFF_THRESHOLD:
                 output = constants.UNICODE_WICK_UPPER
         elif ceil_(min_y) >= height_unit >= floor_(low_y):
             min_diff = min_y - height_unit
             low_diff = low_y - height_unit
-            if min_diff < 0.25:
+            if min_diff < constants.MIN_DIFF_THRESHOLD:
                 output = constants.UNICODE_BODY
-            elif min_diff < 0.75:
+            elif min_diff < constants.MAX_DIFF_THRESHOLD:
                 output = (
                     constants.UNICODE_BOTTOM
-                    if low_diff < 0.25
+                    if low_diff < constants.MIN_DIFF_THRESHOLD
                     else constants.UNICODE_HALF_BODY_TOP
                 )
-            elif low_diff < 0.25:
+            elif low_diff < constants.MIN_DIFF_THRESHOLD:
                 output = constants.UNICODE_WICK
-            elif low_diff < 0.75:
+            elif low_diff < constants.MAX_DIFF_THRESHOLD:
                 output = constants.UNICODE_WICK_LOWER
         elif max_y >= height_unit >= ceil_(min_y):
             output = constants.UNICODE_BODY
