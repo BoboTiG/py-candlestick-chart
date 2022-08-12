@@ -31,7 +31,7 @@ class YAxis:
         )
 
     def render_line(self, y: int) -> str:
-        return self.render_empty() if y % 4 else self._render_tick(y)
+        return self.render_empty() if y % constants.Y_AXIS_SPACING else self._render_tick(y)
 
     def render_empty(self) -> str:
         cell = " " * (constants.CHAR_PRECISION + constants.DEC_PRECISION + 2)

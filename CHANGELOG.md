@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - `Candle.__eq__()` to allow comparing candles
-- 
+- Introduced `constants.Y_AXIS_SPACING` to give control Y-axis spacing between graduations (defaults to `4`, reduce to display more graduations, and set a higher number to display less graduations)
 
 ### Changed
 - Constant changes are now taken into account in real-time, it allowes to tweak the chart appearence after having imported the module
