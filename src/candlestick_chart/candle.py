@@ -24,7 +24,6 @@ class Candle:
 
         return (
             self.open == other.open
-            and self.open == other.open
             and self.high == other.high
             and self.low == other.low
             and self.close == other.close
