@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Tuple
 
+from . import constants
 from .candle import Candle
-from .constants import CHAR_PRECISION, DEC_PRECISION, MARGIN_RIGHT
 from .utils import fnum
 
 if TYPE_CHECKING:
@@ -34,8 +34,8 @@ class YAxis:
         return self.render_empty() if y % 4 else self._render_tick(y)
 
     def render_empty(self) -> str:
-        cell = " " * (CHAR_PRECISION + DEC_PRECISION + 2)
-        margin = " " * (MARGIN_RIGHT + 1)
+        cell = " " * (constants.CHAR_PRECISION + constants.DEC_PRECISION + 2)
+        margin = " " * (constants.MARGIN_RIGHT + 1)
         return f"{cell}│{margin}"
 
     def _render_tick(self, y: int) -> str:
@@ -45,5 +45,5 @@ class YAxis:
         height = chart_data.height
 
         price = min_value + (y * (max_value - min_value) / height)
-        cell_min_length = CHAR_PRECISION + DEC_PRECISION + 1
-        return f"{fnum(price):<{cell_min_length}} │┈{' ' * MARGIN_RIGHT}"
+        cell_min_length = constants.CHAR_PRECISION + constants.DEC_PRECISION + 1
+        return f"{fnum(price):<{cell_min_length}} │┈{' ' * constants.MARGIN_RIGHT}"

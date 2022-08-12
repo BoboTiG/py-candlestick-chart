@@ -2,8 +2,8 @@ from copy import copy
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
+from . import constants
 from .colors import bold, green, red, yellow
-from .constants import LABELS, WIDTH
 from .utils import fnum
 
 if TYPE_CHECKING:
@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 @dataclass(slots=True)
 class InfoBar:
     name: str
-    labels = copy(LABELS)
+    labels = copy(constants.LABELS)
 
     def _render_average(self, candle_set: "CandleSet") -> str:
         if not self.labels.average:
@@ -75,7 +75,7 @@ class InfoBar:
                     filter(
                         len,
                         (
-                            f"{self.name:>{WIDTH + 3}}",
+                            f"{self.name:>{constants.WIDTH + 3}}",
                             self._render_price(candle_set),
                             self._render_highest(candle_set),
                             self._render_lowest(candle_set),

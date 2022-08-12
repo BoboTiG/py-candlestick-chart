@@ -2,19 +2,9 @@ from dataclasses import dataclass
 from math import ceil, floor
 from typing import TYPE_CHECKING, List, Tuple
 
+from . import constants
 from .candle import CandleType, Candle
 from .colors import truecolor
-from .constants import (
-    UNICODE_VOID,
-    UNICODE_BODY,
-    UNICODE_HALF_BODY_BOTTOM,
-    UNICODE_HALF_BODY_TOP,
-    UNICODE_WICK,
-    UNICODE_TOP,
-    UNICODE_BOTTOM,
-    UNICODE_WICK_UPPER,
-    UNICODE_WICK_LOWER,
-)
 from .y_axis import YAxis
 
 if TYPE_CHECKING:
@@ -37,7 +27,7 @@ class ChartRenderer:
     def _render_candle(self, candle: Candle, y: int, y_axis: YAxis) -> str:
         height_unit = float(y)
         high_y, low_y, max_y, min_y = y_axis.price_to_heights(candle)
-        output = UNICODE_VOID
+        output = constants.UNICODE_VOID
 
         ceil_ = ceil
         floor_ = floor
@@ -46,26 +36,34 @@ class ChartRenderer:
             max_diff = max_y - height_unit
             high_diff = high_y - height_unit
             if max_diff > 0.75:
-                output = UNICODE_BODY
+                output = constants.UNICODE_BODY
             elif max_diff > 0.25:
-                output = UNICODE_TOP if high_diff > 0.75 else UNICODE_HALF_BODY_BOTTOM
+                output = (
+                    constants.UNICODE_TOP
+                    if high_diff > 0.75
+                    else constants.UNICODE_HALF_BODY_BOTTOM
+                )
             elif high_diff > 0.75:
-                output = UNICODE_WICK
+                output = constants.UNICODE_WICK
             elif high_diff > 0.25:
-                output = UNICODE_WICK_UPPER
+                output = constants.UNICODE_WICK_UPPER
         elif ceil_(min_y) >= height_unit >= floor_(low_y):
             min_diff = min_y - height_unit
             low_diff = low_y - height_unit
             if min_diff < 0.25:
-                output = UNICODE_BODY
+                output = constants.UNICODE_BODY
             elif min_diff < 0.75:
-                output = UNICODE_BOTTOM if low_diff < 0.25 else UNICODE_HALF_BODY_TOP
+                output = (
+                    constants.UNICODE_BOTTOM
+                    if low_diff < 0.25
+                    else constants.UNICODE_HALF_BODY_TOP
+                )
             elif low_diff < 0.25:
-                output = UNICODE_WICK
+                output = constants.UNICODE_WICK
             elif low_diff < 0.75:
-                output = UNICODE_WICK_LOWER
+                output = constants.UNICODE_WICK_LOWER
         elif max_y >= height_unit >= ceil_(min_y):
-            output = UNICODE_BODY
+            output = constants.UNICODE_BODY
 
         return self._colorize(candle.type, output)
 

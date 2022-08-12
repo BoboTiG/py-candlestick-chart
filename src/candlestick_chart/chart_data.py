@@ -1,8 +1,8 @@
 from os import get_terminal_size
 
+from . import constants
 from .candle import Candles
 from .candle_set import CandleSet
-from .constants import HEIGHT, MARGIN_TOP, WIDTH
 from .volume_pane import VolumePane
 
 
@@ -27,10 +27,15 @@ class ChartData:
 
     def compute_height(self, volume_pane: VolumePane) -> None:
         volume_pane_height = volume_pane.height if volume_pane.enabled else 0
-        self.height = self.terminal_size[1] - MARGIN_TOP - HEIGHT - volume_pane_height
+        self.height: int = (
+            self.terminal_size[1]
+            - constants.MARGIN_TOP
+            - constants.HEIGHT
+            - volume_pane_height
+        )
 
     def compute_visible_candles(self) -> None:
-        nb_visible_candles = self.width - WIDTH
+        nb_visible_candles = self.width - constants.WIDTH
         self.visible_candle_set.set_candles(
             self.main_candle_set.candles[-nb_visible_candles:][:]
         )
