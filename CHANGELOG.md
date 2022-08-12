@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Constant changes are now taken into account in real-time, it allowes to tweak the chart appearence after having imported the module
 
 ### Changed
-- 
+- Always show the volume pane when it is enabled
 
 ### Removed
 - 

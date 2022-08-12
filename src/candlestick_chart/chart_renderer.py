@@ -81,7 +81,7 @@ class ChartRenderer:
                 self._render_candle(candle, y, chart.y_axis) for candle in candles
             )
 
-        if chart.volume_pane.enabled and candle_set.max_volume:
+        if chart.volume_pane.enabled:
             render_empty = chart.y_axis.render_empty
             render = chart.volume_pane.render
             max_volume = candle_set.max_volume
