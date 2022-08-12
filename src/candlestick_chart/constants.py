@@ -22,6 +22,10 @@ WIDTH: int = CHAR_PRECISION + MARGIN_RIGHT + 1 + DEC_PRECISION + MARGIN_RIGHT
 HEIGHT: int = 2
 Y_AXIS_SPACING = 4
 
+# Numbers formatting
+PRECISION: int = 2
+PRECISION_SMALL: int = 4
+
 # Chart characters
 UNICODE_BODY: str = "┃"
 UNICODE_BOTTOM: str = "╿"

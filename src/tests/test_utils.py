@@ -1,6 +1,6 @@
 from io import StringIO
+from unittest.mock import patch
 import pytest
-
 from candlestick_chart import Candle, utils
 
 
@@ -13,6 +13,7 @@ from candlestick_chart import Candle, utils
         (1.23456789, "1.23"),
         (1.23456789, "1.23"),
         (1234.56789, "1,234.57"),
+        (1.0, "1.00"),
         (0.1, "0.1000"),
         (0.01, "0.0100"),
         (0.001, "0.0010"),
@@ -30,6 +31,20 @@ def test_fnum(value, expected):
     assert utils.fnum(str(value)) == expected
     if value != 0.0:
         assert utils.fnum(value * -1) == f"-{expected}"
+
+
+def test_fnum_precision():
+    with patch("candlestick_chart.constants.PRECISION", 0):
+        assert utils.fnum(1.0) == "1"
+    with patch("candlestick_chart.constants.PRECISION", 10):
+        assert utils.fnum(1.0) == "1.0000000000"
+
+
+def test_fnum_precision_small():
+    with patch("candlestick_chart.constants.PRECISION_SMALL", 0):
+        assert utils.fnum(0.123456789) == "0"
+    with patch("candlestick_chart.constants.PRECISION_SMALL", 6):
+        assert utils.fnum(0.123456789) == "0.123457"
 
 
 @pytest.mark.parametrize(

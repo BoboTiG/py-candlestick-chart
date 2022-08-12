@@ -8,10 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased] - 2022-08-12
 
 ### Added
-- 
+- `constants.PRECISION`, and `constants.PRECISION_SMALL` to control the number of decimals to keep when formatting numbers with `fnum()` (defaults to `2`, and `4`, respectively)
 
 ### Changed
-- 
+- Fix formatting of `1.0` number within `fnum()`
 
 ### Removed
 - 

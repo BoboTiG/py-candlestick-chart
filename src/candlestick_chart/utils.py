@@ -1,12 +1,12 @@
 import re
-from functools import cache
 from pathlib import Path
 from typing import Any, Iterator, Match, Tuple
 
+from . import constants
 from .candle import Candle, Candles
 
 # For compact numbers formatting
-FORMAT_NUMBER_REGEX = re.compile(r"(0\.)(0{4,})(.{4}).*")
+REPLACE_CONSECUTIVE_ZEROES = re.compile(r"(0\.)(0{4,})(.{4}).*").sub
 
 
 def fnum_replace_consecutive_zeroes(match: Match[str]) -> str:
@@ -14,7 +14,6 @@ def fnum_replace_consecutive_zeroes(match: Match[str]) -> str:
     return "".join([p1, f"⦗0×{len(p2)}⦘", p3])
 
 
-@cache
 def fnum(value: int | float | str) -> str:
     if isinstance(value, str):
         try:
@@ -23,18 +22,18 @@ def fnum(value: int | float | str) -> str:
             value = float(value)
 
     # 0, 0.00, > 1, and > 1.00 (same for negative numbers)
-    if not value or abs(value) > 1:
-        return f"{value:,}" if isinstance(value, int) else f"{value:,.2f}"
+    if not value or abs(value) >= 1:
+        return (
+            f"{value:,}"
+            if isinstance(value, int)
+            else f"{value:,.{constants.PRECISION}f}"
+        )
 
     # 0.000000000012345678 -> 0.⦗0×10⦘1234
-    formatted = FORMAT_NUMBER_REGEX.sub(
+    formatted = REPLACE_CONSECUTIVE_ZEROES(
         fnum_replace_consecutive_zeroes, f"{value:.18f}"
     )
-    if "0×" in formatted:
-        return formatted
-
-    # 0.123456789 -> 0.1234
-    return f"{value:.4f}"
+    return formatted if "0×" in formatted else f"{value:.{constants.PRECISION_SMALL}f}"
 
 
 def hexa_to_rgb(hex_code: str) -> Tuple[int, int, int]:
@@ -63,7 +62,7 @@ def parse_candles_from_json(file: str) -> Candles:
 
 
 def parse_candles_from_stdin() -> Candles:
-    import sys
     import json
+    import sys
 
     return make_candles(json.loads("".join(sys.stdin)))
