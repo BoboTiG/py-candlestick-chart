@@ -12,8 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `constants.MIN_DIFF_THRESHOLD`, and `constants.MAX_DIFF_THRESHOLD` to control candle top, and bottom, thickness `fnum()` (defaults to `0.25`, and `0.75`, respectively)
 
 ### Changed
-- Fix formatting of `1.0` number within `fnum()`
-- Fix imports using `isort`
+- Fixed formatting of `1.0` number within `fnum()`
+- Fixed imports using `isort`
 
 ### Removed
 - 
