@@ -1,6 +1,7 @@
 from unittest.mock import patch
 
 import pytest
+
 from candlestick_chart.candle import Candle
 from candlestick_chart.chart_data import ChartData
 from candlestick_chart.volume_pane import VolumePane

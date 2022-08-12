@@ -3,7 +3,7 @@ from math import ceil, floor
 from typing import TYPE_CHECKING, List, Tuple
 
 from . import constants
-from .candle import CandleType, Candle
+from .candle import Candle, CandleType
 from .colors import truecolor
 from .y_axis import YAxis
 

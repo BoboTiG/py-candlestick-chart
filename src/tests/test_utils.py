@@ -1,6 +1,8 @@
 from io import StringIO
 from unittest.mock import patch
+
 import pytest
+
 from candlestick_chart import Candle, utils
 
 

@@ -1,12 +1,12 @@
 import sys
 from argparse import ArgumentParser, Namespace, RawDescriptionHelpFormatter
 
-from candlestick_chart import __version__, Chart
+from candlestick_chart import Chart, __version__
 from candlestick_chart.utils import (
     hexa_to_rgb,
     parse_candles_from_csv,
-    parse_candles_from_stdin,
     parse_candles_from_json,
+    parse_candles_from_stdin,
 )
 
 

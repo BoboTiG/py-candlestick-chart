@@ -1,11 +1,12 @@
 from time import sleep
 
-from candlestick_chart.candle import Candles
-from candlestick_chart.chart import Chart
-from candlestick_chart.utils import parse_candles_from_csv
 from rich.layout import Layout
 from rich.live import Live
 from rich.panel import Panel
+
+from candlestick_chart.candle import Candles
+from candlestick_chart.chart import Chart
+from candlestick_chart.utils import parse_candles_from_csv
 
 
 def make_layout() -> Layout:
