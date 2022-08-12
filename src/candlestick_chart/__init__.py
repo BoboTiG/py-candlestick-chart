@@ -8,7 +8,7 @@ You can always get the latest version of this module at:
 If that URL should fail, try contacting the author.
 """
 
-__version__ = "2.2.1"
+__version__ = "2.2.2-dev"
 __author__ = "Mickaël 'Tiger-222' Schoentgen"
 __copyright__ = """
 Copyright (c) 2022, Mickaël 'Tiger-222' Schoentgen
