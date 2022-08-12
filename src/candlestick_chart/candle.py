@@ -18,6 +18,21 @@ class Candle:
         self.timestamp = float(kwargs.get("timestamp", 0.0))
         self.type = CandleType.bullish if self.open < self.close else CandleType.bearish
 
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Candle):
+            raise NotImplementedError()
+
+        return (
+            self.open == other.open
+            and self.open == other.open
+            and self.high == other.high
+            and self.low == other.low
+            and self.close == other.close
+            and self.volume == other.volume
+            and self.timestamp == other.timestamp
+            and self.type == other.type
+        )
+
     def __repr__(self) -> str:
         return (
             f"{type(self).__name__}<"
