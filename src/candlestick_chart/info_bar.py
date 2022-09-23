@@ -75,7 +75,7 @@ class InfoBar:
                     filter(
                         len,
                         (
-                            f"{self.name:>{constants.WIDTH + 3}}",
+                            self.name,
                             self._render_price(candle_set),
                             self._render_highest(candle_set),
                             self._render_lowest(candle_set),

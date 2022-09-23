@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Fixed a zero division error when no candle volume is set
+- Chart title is now hidden if it is an empty string
 
 ### Removed
 - 
