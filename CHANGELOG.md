@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] - 2022-08-12
+## [2.3.0] - 2022-09-23
 
 ### Added
 - Capability to display graduations on the right side by setting the `constants.Y_AXIS_ON_THE_RIGHT` to `True`
@@ -13,9 +13,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Fixed a zero division error when no candle volume is set
 - Chart title is now hidden if it is an empty string
-
-### Removed
-- 
 
 ## [2.2.1] - 2022-08-12
 
@@ -59,7 +56,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - First version.
 
 
-[Unreleased]: https://github.com/BoboTiG/py-candlestick-chart/compare/v2.2.1...HEAD
+[2.3.0]: https://github.com/BoboTiG/py-candlestick-chart/tree/v2.3.0
 [2.2.1]: https://github.com/BoboTiG/py-candlestick-chart/tree/v2.2.1
 [2.2.0]: https://github.com/BoboTiG/py-candlestick-chart/tree/v2.2.0
 [2.1.0]: https://github.com/BoboTiG/py-candlestick-chart/tree/v2.1.0
