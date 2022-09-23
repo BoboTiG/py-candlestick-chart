@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased] - 2022-08-12
 
 ### Added
-- 
+- Capability to display graduations on the right side by setting the `constants.Y_AXIS_ON_THE_RIGHT` to `True`
 
 ### Changed
 - Fixed a zero division error when no candle volume is set

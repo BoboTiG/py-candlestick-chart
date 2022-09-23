@@ -74,22 +74,40 @@ class ChartRenderer:
         candle_set = chart_data.visible_candle_set
         candles = candle_set.candles
 
+        graduations_on_right = constants.Y_AXIS_ON_THE_RIGHT
         render_line = chart.y_axis.render_line
+
         for y in range(chart_data.height, 0, -1):
-            output.extend(("\n", render_line(y)))
+            if graduations_on_right:
+                output.append("\n")
+            else:
+                output.extend(("\n", render_line(y)))
+
             output.extend(
                 self._render_candle(candle, y, chart.y_axis) for candle in candles
             )
+
+            if graduations_on_right:
+                output.append(render_line(y))
 
         if chart.volume_pane.enabled:
             render_empty = chart.y_axis.render_empty
             render = chart.volume_pane.render
             max_volume = candle_set.max_volume
+
             for y in range(chart.volume_pane.height, 0, -1):
-                output.extend(("\n", render_empty()))
+                if graduations_on_right:
+                    output.append("\n")
+                else:
+                    output.extend(("\n", render_empty()))
+
                 output.extend(render(candle, y, max_volume) for candle in candles)
+
+                if graduations_on_right:
+                    output.append(render_empty())
 
         output.append(
             chart.info_bar.render(chart_data.main_candle_set, chart_data.width)
         )
+
         return "".join(output)

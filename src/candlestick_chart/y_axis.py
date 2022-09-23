@@ -38,6 +38,9 @@ class YAxis:
         )
 
     def render_empty(self) -> str:
+        if constants.Y_AXIS_ON_THE_RIGHT:
+            return " │"
+
         cell = " " * (constants.CHAR_PRECISION + constants.DEC_PRECISION + 2)
         margin = " " * (constants.MARGIN_RIGHT + 1)
         return f"{cell}│{margin}"
@@ -50,4 +53,8 @@ class YAxis:
 
         price = min_value + (y * (max_value - min_value) / height)
         cell_min_length = constants.CHAR_PRECISION + constants.DEC_PRECISION + 1
-        return f"{fnum(price):<{cell_min_length}} │┈{' ' * constants.MARGIN_RIGHT}"
+        return (
+            f" │― {fnum(price):<{cell_min_length}}"
+            if constants.Y_AXIS_ON_THE_RIGHT
+            else f"{fnum(price):<{cell_min_length}} │―{'M' * constants.MARGIN_RIGHT}"
+        )
