@@ -1,7 +1,7 @@
 import sys
 
 from candlestick_chart import Chart
-from candlestick_chart.utils import parse_candles_from_json
+from candlestick_chart.utils import fnum, parse_candles_from_json
 
 
 def main() -> int:
@@ -13,6 +13,7 @@ def main() -> int:
     # Set customs colors
     chart.set_bear_color(1, 205, 254)
     chart.set_bull_color(255, 107, 153)
+    chart.set_highlight(fnum(30544.20), (0, 0, 255))
 
     chart.draw()
     return 0

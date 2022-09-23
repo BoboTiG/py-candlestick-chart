@@ -86,6 +86,13 @@ chart.update_candles(candles[:3])
 # Or completely replace current candles
 chart.update_candles(candles[:3], reset=True)
 
+# Set a custom color at price 52,348.63
+# from candlestick_chart.utils import fnum
+chart.set_highlight(fnum(52,348.63), "red")
+chart.set_highlight(fnum(52,348.63), (255, 0, 0))
+chart.set_highlight(fnum(52,348.63), "91m")
+chart.set_highlight(fnum(52,348.63), "91;47m")
+
 chart.draw()
 ```
 

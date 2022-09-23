@@ -6,7 +6,7 @@ from rich.panel import Panel
 
 from candlestick_chart.candle import Candles
 from candlestick_chart.chart import Chart
-from candlestick_chart.utils import parse_candles_from_csv
+from candlestick_chart.utils import fnum, parse_candles_from_csv
 
 
 def make_layout() -> Layout:
@@ -28,6 +28,7 @@ def make_chart(candles: Candles, nature: str) -> Chart:
     chart.set_bull_color(1, 205, 254)
     chart.set_label("average", "")
     chart.set_label("volume", "")
+    chart.set_highlight(fnum(53730.68), "red")
     return chart
 
 

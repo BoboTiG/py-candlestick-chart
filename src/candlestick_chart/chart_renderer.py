@@ -76,19 +76,20 @@ class ChartRenderer:
 
         graduations_on_right = constants.Y_AXIS_ON_THE_RIGHT
         render_line = chart.y_axis.render_line
+        highlights = chart.highlights or {}
 
         for y in range(chart_data.height, 0, -1):
             if graduations_on_right:
                 output.append("\n")
             else:
-                output.extend(("\n", render_line(y)))
+                output.extend(("\n", render_line(y, highlights)))
 
             output.extend(
                 self._render_candle(candle, y, chart.y_axis) for candle in candles
             )
 
             if graduations_on_right:
-                output.append(render_line(y))
+                output.append(render_line(y, highlights))
 
         if chart.volume_pane.enabled:
             render_empty = chart.y_axis.render_empty

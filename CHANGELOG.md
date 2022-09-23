@@ -8,7 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased] - 202x-xx-xx
 
 ### Added
-- 
+- Capability to highlight values on the Y-axis using `chart.set_highlight()`
+- New colors: blue, cyan, grey, magenta, and white
 
 ### Changed
 - 

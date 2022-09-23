@@ -1,8 +1,9 @@
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Tuple
+from typing import TYPE_CHECKING, Dict, Tuple
 
 from . import constants
 from .candle import Candle
+from .colors import color
 from .utils import fnum
 
 if TYPE_CHECKING:
@@ -30,14 +31,42 @@ class YAxis:
             (min_open - min_value) / diff * height,  # min_y
         )
 
-    def render_line(self, y: int) -> str:
+    def render_line(
+        self, y: int, highlights: Dict[str, str | Tuple[int, int, int]] = None
+    ) -> str:
         return (
-            self.render_empty()
+            self.render_empty(y=y, highlights=highlights)
             if y % constants.Y_AXIS_SPACING
-            else self._render_tick(y)
+            else self._render_tick(y, highlights or {})
         )
 
-    def render_empty(self) -> str:
+    def render_empty(
+        self, y: float = None, highlights: Dict[str, str | Tuple[int, int, int]] = None
+    ) -> str:
+        if highlights and y:
+            chart_data = self.chart_data
+            min_value = chart_data.visible_candle_set.min_price
+            max_value = chart_data.visible_candle_set.max_price
+            height = chart_data.height
+
+            cell_min_length = constants.CHAR_PRECISION + constants.DEC_PRECISION + 1
+            price = fnum(min_value + (y * (max_value - min_value) / height))
+            price_upper = fnum(min_value + ((y + 1) * (max_value - min_value) / height))
+
+            for target_price, custom_color in highlights.items():
+                if not (price < target_price < price_upper):
+                    continue
+
+                colorized_price = f"{color(target_price, custom_color)}"
+                diff = len(colorized_price) - len(price)
+                price = f"{colorized_price:<{cell_min_length + diff}}"
+
+                return (
+                    f" │― {price}"
+                    if constants.Y_AXIS_ON_THE_RIGHT
+                    else f"{price} │―{'' * constants.MARGIN_RIGHT}"
+                )
+
         if constants.Y_AXIS_ON_THE_RIGHT:
             return " │"
 
@@ -45,16 +74,26 @@ class YAxis:
         margin = " " * (constants.MARGIN_RIGHT + 1)
         return f"{cell}│{margin}"
 
-    def _render_tick(self, y: int) -> str:
+    def _render_tick(
+        self, y: int, highlights: Dict[str, str | Tuple[int, int, int]]
+    ) -> str:
         chart_data = self.chart_data
         min_value = chart_data.visible_candle_set.min_price
         max_value = chart_data.visible_candle_set.max_price
         height = chart_data.height
 
-        price = min_value + (y * (max_value - min_value) / height)
         cell_min_length = constants.CHAR_PRECISION + constants.DEC_PRECISION + 1
+        price = fnum(min_value + (y * (max_value - min_value) / height))
+
+        if custom_color := highlights.get(price):
+            colorized_price = f"{color(price, custom_color)}"
+            diff = len(colorized_price) - len(price)
+            price = f"{colorized_price:<{cell_min_length + diff}}"
+        else:
+            price = f"{price:<{cell_min_length}}"
+
         return (
-            f" │― {fnum(price):<{cell_min_length}}"
+            f" │― {price}"
             if constants.Y_AXIS_ON_THE_RIGHT
-            else f"{fnum(price):<{cell_min_length}} │―{'M' * constants.MARGIN_RIGHT}"
+            else f"{price} │―{'' * constants.MARGIN_RIGHT}"
         )

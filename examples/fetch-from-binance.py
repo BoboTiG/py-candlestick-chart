@@ -48,6 +48,7 @@ def main() -> int:
     chart.set_volume_pane_height(4)
     chart.set_volume_pane_enabled(True)
     # chart.set_volume_pane_unicode_fill("+")
+    chart.set_highlight("0.2377", "93;45m")
 
     chart.draw()
     return 0
