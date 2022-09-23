@@ -24,7 +24,7 @@ class VolumePane:
         return truecolor(string, *color)
 
     def render(self, candle: Candle, y: int, max_volume: float) -> str:
-        volume_percent_of_max = candle.volume / max_volume
+        volume_percent_of_max = candle.volume / (max_volume or 1)
         ratio = volume_percent_of_max * self.height
 
         if y < ceil(ratio):
