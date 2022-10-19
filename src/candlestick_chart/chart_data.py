@@ -39,7 +39,7 @@ class ChartData:
         if not constants.Y_AXIS_ON_THE_RIGHT:
             nb_visible_candles -= constants.MARGIN_RIGHT
         self.visible_candle_set.set_candles(
-            self.main_candle_set.candles[-nb_visible_candles:][:]
+            self.main_candle_set.candles[-nb_visible_candles:]
         )
 
     def reset_candles(self) -> None:

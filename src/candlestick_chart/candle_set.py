@@ -30,16 +30,35 @@ class CandleSet:
         if not self.candles:
             return
 
-        self.cumulative_volume = sum(candle.volume for candle in self.candles)
-        self.last_price = self.candles[-1].close
+        candles = self.candles
 
-        open_value = self.candles[0].open
-        close_value = self.candles[-1].close
+        open_value = candles[0].open
+        self.last_price = close_value = candles[-1].close
         self.variation = ((close_value - open_value) / open_value) * 100.0
 
-        self.average = sum(candle.close for candle in self.candles) / len(self.candles)
+        cumulative_volume = 0.0
+        average = 0.0
+        max_price = 0.0
+        min_price = float("inf")
+        max_volume = 0.0
+        min_volume = 0.0
 
-        self.max_price = max(self.candles, key=lambda c: c.high).high
-        self.min_price = min(self.candles, key=lambda c: c.low).low
-        self.max_volume = max(self.candles, key=lambda c: c.volume).volume
-        self.min_volume = min(self.candles, key=lambda c: c.volume).volume
+        for candle in candles:
+            volume = candle.volume
+            cumulative_volume += volume
+            average += candle.close
+            if candle.high > max_price:
+                max_price = candle.high
+            if candle.low < min_price:
+                min_price = candle.low
+            if volume > max_volume:
+                max_volume = volume
+            elif volume < min_volume:
+                min_volume = volume
+
+        self.cumulative_volume = cumulative_volume
+        self.average = average / len(candles)
+        self.max_price = max_price
+        self.min_price = min_price
+        self.max_volume = max_volume
+        self.min_volume = min_volume

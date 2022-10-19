@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Capability to round prices on the Y-axis via `Y_AXIS_ROUND_DIR` (either `down` [default], or `up`), and `Y_AXIS_ROUND_MULTIPLIER` (`0.0` by default, set something like `1 / 0.01` to round price to 2 decimals), constants
 
 ### Changed
-- 
+- Improve rendering performances by ~60%
 
 ### Removed
 - 
