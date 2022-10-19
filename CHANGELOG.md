@@ -5,16 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] - 2022-xx-xx
+## [2.5.0] - 2022-10-19
 
 ### Added
 - Capability to round prices on the Y-axis via `Y_AXIS_ROUND_DIR` (either `down` [default], or `up`), and `Y_AXIS_ROUND_MULTIPLIER` (`0.0` by default, set something like `1 / 0.01` to round price to 2 decimals), constants
 
 ### Changed
 - Improve rendering performances by ~60%
-
-### Removed
-- 
 
 ## [2.4.0] - 2022-09-23
 
@@ -73,7 +70,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - First version.
 
 
-[Unreleased]: https://github.com/BoboTiG/py-candlestick-chart/compare/v2.4.0...HEAD
+[2.5.0]: https://github.com/BoboTiG/py-candlestick-chart/tree/v2.5.0
 [2.4.0]: https://github.com/BoboTiG/py-candlestick-chart/tree/v2.4.0
 [2.3.0]: https://github.com/BoboTiG/py-candlestick-chart/tree/v2.3.0
 [2.2.1]: https://github.com/BoboTiG/py-candlestick-chart/tree/v2.2.1
