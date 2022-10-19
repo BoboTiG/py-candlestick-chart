@@ -42,3 +42,8 @@ MAX_DIFF_THRESHOLD = 0.75
 
 # Chart options
 Y_AXIS_ON_THE_RIGHT = False
+Y_AXIS_ROUND_DIR = "down"  # Or "up"
+# Examples:
+#   1 / 0.01
+#   1 / 0.0025
+Y_AXIS_ROUND_MULTIPLIER = 0.0

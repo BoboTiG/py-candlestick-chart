@@ -1,5 +1,6 @@
+import math
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Dict, Tuple
+from typing import TYPE_CHECKING, Callable, Dict, Tuple
 
 from . import constants
 from .candle import Candle
@@ -31,6 +32,20 @@ class YAxis:
             (min_open - min_value) / diff * height,  # min_y
         )
 
+    def _round_price(
+        self,
+        value: float,
+        fn_down: Callable[[float], float] = math.floor,
+        fn_up: Callable[[float], float] = math.ceil,
+    ) -> str:
+        if constants.Y_AXIS_ROUND_MULTIPLIER > 0.0:
+            multiplier = constants.Y_AXIS_ROUND_MULTIPLIER
+            if constants.Y_AXIS_ROUND_DIR == "down":
+                value = fn_down(value * multiplier) / multiplier
+            else:
+                value = fn_up(value * multiplier) / multiplier
+        return fnum(value)
+
     def render_line(
         self, y: int, highlights: Dict[str, str | Tuple[int, int, int]] = None
     ) -> str:
@@ -50,8 +65,12 @@ class YAxis:
             height = chart_data.height
 
             cell_min_length = constants.CHAR_PRECISION + constants.DEC_PRECISION + 1
-            price = fnum(min_value + (y * (max_value - min_value) / height))
-            price_upper = fnum(min_value + ((y + 1) * (max_value - min_value) / height))
+            price = self._round_price(
+                min_value + (y * (max_value - min_value) / height)
+            )
+            price_upper = self._round_price(
+                min_value + ((y + 1) * (max_value - min_value) / height)
+            )
 
             for target_price, custom_color in highlights.items():
                 if not (price < target_price < price_upper):
@@ -83,7 +102,7 @@ class YAxis:
         height = chart_data.height
 
         cell_min_length = constants.CHAR_PRECISION + constants.DEC_PRECISION + 1
-        price = fnum(min_value + (y * (max_value - min_value) / height))
+        price = self._round_price(min_value + (y * (max_value - min_value) / height))
 
         if custom_color := highlights.get(price):
             colorized_price = f"{color(price, custom_color)}"
