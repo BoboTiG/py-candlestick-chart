@@ -56,6 +56,9 @@ COLORS = {
 
 
 def color(text: str, value: str | Tuple[int, int, int]) -> str:
+    if not value:
+        return text
+
     if isinstance(value, tuple):
         return truecolor(text, *value)
 

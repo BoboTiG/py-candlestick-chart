@@ -6,6 +6,7 @@ from candlestick_chart.colors import color
 @pytest.mark.parametrize(
     "custom_color, expected",
     [
+        ("", "𓅂"),
         ("red", "\x1b[91m𓅂\x1b[00m"),
         ((255, 0, 0), "\x1b[38;2;255;0;0m𓅂\x1b[00m"),
         # ANSI color

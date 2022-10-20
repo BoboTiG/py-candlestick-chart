@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -
 
 ### Changed
--
+- Allow to pass a blank color to `color()`, it will return the text unchanged
 
 ### Removed
 -
