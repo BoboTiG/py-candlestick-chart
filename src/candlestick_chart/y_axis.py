@@ -32,6 +32,15 @@ class YAxis:
             (min_open - min_value) / diff * height,  # min_y
         )
 
+    def render_line(
+        self, y: int, highlights: Dict[str, str | Tuple[int, int, int]] = None
+    ) -> str:
+        return (
+            self.render_empty(y=y, highlights=highlights)
+            if y % constants.Y_AXIS_SPACING
+            else self._render_tick(y, highlights or {})
+        )
+
     def _round_price(
         self,
         value: float,
@@ -46,45 +55,46 @@ class YAxis:
                 value = fn_up(value * multiplier) / multiplier
         return fnum(value)
 
-    def render_line(
-        self, y: int, highlights: Dict[str, str | Tuple[int, int, int]] = None
-    ) -> str:
-        return (
-            self.render_empty(y=y, highlights=highlights)
-            if y % constants.Y_AXIS_SPACING
-            else self._render_tick(y, highlights or {})
+    def _render_price(
+        self, y: float, highlights: Dict[str, str | Tuple[int, int, int]]
+    ) -> Tuple[bool, str]:
+        chart_data = self.chart_data
+        min_value = chart_data.visible_candle_set.min_price
+        max_value = chart_data.visible_candle_set.max_price
+        height = chart_data.height
+
+        cell_min_length = constants.CHAR_PRECISION + constants.DEC_PRECISION + 1
+        price = self._round_price(min_value + (y * (max_value - min_value) / height))
+        price_upper = self._round_price(
+            min_value + ((y + 1) * (max_value - min_value) / height)
         )
+
+        has_special_price = False
+        custom_color: str | Tuple[int, int, int] = ""
+
+        for target_price, target_color in highlights.items():
+            if not (price <= target_price < price_upper):
+                continue
+            price = target_price
+            has_special_price = True
+            custom_color = target_color
+            break
+
+        price = (
+            f" {color(f'├ {price:<{cell_min_length}}', custom_color)}"
+            if constants.Y_AXIS_ON_THE_RIGHT
+            else f"{color(f'{price:<{cell_min_length}} ┤', custom_color)}{' ' * constants.MARGIN_RIGHT}"
+        )
+
+        return has_special_price, price
 
     def render_empty(
         self, y: float = None, highlights: Dict[str, str | Tuple[int, int, int]] = None
     ) -> str:
         if highlights and y:
-            chart_data = self.chart_data
-            min_value = chart_data.visible_candle_set.min_price
-            max_value = chart_data.visible_candle_set.max_price
-            height = chart_data.height
-
-            cell_min_length = constants.CHAR_PRECISION + constants.DEC_PRECISION + 1
-            price = self._round_price(
-                min_value + (y * (max_value - min_value) / height)
-            )
-            price_upper = self._round_price(
-                min_value + ((y + 1) * (max_value - min_value) / height)
-            )
-
-            for target_price, custom_color in highlights.items():
-                if not (price < target_price < price_upper):
-                    continue
-
-                colorized_price = f"{color(target_price, custom_color)}"
-                diff = len(colorized_price) - len(price)
-                price = f"{colorized_price:<{cell_min_length + diff}}"
-
-                return (
-                    f" │― {price}"
-                    if constants.Y_AXIS_ON_THE_RIGHT
-                    else f"{price} │―{'' * constants.MARGIN_RIGHT}"
-                )
+            has_special_price, price = self._render_price(y, highlights)
+            if has_special_price:
+                return price
 
         if constants.Y_AXIS_ON_THE_RIGHT:
             return " │"
@@ -96,23 +106,5 @@ class YAxis:
     def _render_tick(
         self, y: int, highlights: Dict[str, str | Tuple[int, int, int]]
     ) -> str:
-        chart_data = self.chart_data
-        min_value = chart_data.visible_candle_set.min_price
-        max_value = chart_data.visible_candle_set.max_price
-        height = chart_data.height
-
-        cell_min_length = constants.CHAR_PRECISION + constants.DEC_PRECISION + 1
-        price = self._round_price(min_value + (y * (max_value - min_value) / height))
-
-        if custom_color := highlights.get(price):
-            colorized_price = f"{color(price, custom_color)}"
-            diff = len(colorized_price) - len(price)
-            price = f"{colorized_price:<{cell_min_length + diff}}"
-        else:
-            price = f"{price:<{cell_min_length}}"
-
-        return (
-            f" │― {price}"
-            if constants.Y_AXIS_ON_THE_RIGHT
-            else f"{price} │―{'' * constants.MARGIN_RIGHT}"
-        )
+        _, price = self._render_price(y, highlights)
+        return price

@@ -8,10 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased] - 202x-xx-xx
 
 ### Added
--
+- 
 
 ### Changed
 - Allow to pass a blank color to `color()`, it will return the text unchanged
+- Refactored price hightlights, it should now highlight price that would be hidden by a slightly upper value (like 1.025 being hidden because that exact price is not available, but it is surrounded by 1.02, and 1.03, then it will take the place of 1.02)
+- Better-looking Y-axis style (when on the left-side: `PRICE │―` → `PRICE ┤`, and on the right-side: `│― PRICE` → `├ PRICE`)
 
 ### Removed
 -
