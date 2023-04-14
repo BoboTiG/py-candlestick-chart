@@ -100,7 +100,7 @@ class YAxis:
             return " │"
 
         cell = " " * (constants.CHAR_PRECISION + constants.DEC_PRECISION + 2)
-        margin = " " * (constants.MARGIN_RIGHT + 1)
+        margin = " " * constants.MARGIN_RIGHT
         return f"{cell}│{margin}"
 
     def _render_tick(

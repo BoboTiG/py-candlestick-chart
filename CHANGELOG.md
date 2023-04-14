@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 
 
 ### Changed
-- 
+- Fixed off-by-one shift when rendering empty lines on the Y-axis (the issue was visible only when the Y-axis was on the left side)
 
 ### Removed
 - 
