@@ -23,16 +23,10 @@ def fnum(value: int | float | str) -> str:
 
     # 0, 0.00, > 1, and > 1.00 (same for negative numbers)
     if not value or abs(value) >= 1:
-        return (
-            f"{value:,}"
-            if isinstance(value, int)
-            else f"{value:,.{constants.PRECISION}f}"
-        )
+        return f"{value:,}" if isinstance(value, int) else f"{value:,.{constants.PRECISION}f}"
 
     # 0.000000000012345678 -> 0.⦗0×10⦘1234
-    formatted = REPLACE_CONSECUTIVE_ZEROES(
-        fnum_replace_consecutive_zeroes, f"{value:.18f}"
-    )
+    formatted = REPLACE_CONSECUTIVE_ZEROES(fnum_replace_consecutive_zeroes, f"{value:.18f}")
     return formatted if "0×" in formatted else f"{value:.{constants.PRECISION_SMALL}f}"
 
 

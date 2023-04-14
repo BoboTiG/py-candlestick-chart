@@ -33,9 +33,7 @@ class Chart:
         # A dict of price -> color to display custom colors on specific prices on the Y-axis
         self.highlights: Dict[str, str | Tuple[int, int, int]] = {}
 
-    def __rich_console__(
-        self, console: "Console", options: "ConsoleOptions"
-    ) -> Iterable[str]:
+    def __rich_console__(self, console: "Console", options: "ConsoleOptions") -> Iterable[str]:
         from rich.ansi import AnsiDecoder
         from rich.console import Group
 

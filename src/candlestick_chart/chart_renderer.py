@@ -17,11 +17,7 @@ class ChartRenderer:
     bullish_color: Tuple[int, int, int] = (52, 208, 88)
 
     def _colorize(self, candle_type: int, string: str) -> str:
-        color = (
-            self.bearish_color
-            if candle_type == CandleType.bearish
-            else self.bullish_color
-        )
+        color = self.bearish_color if candle_type == CandleType.bearish else self.bullish_color
         return truecolor(string, *color)
 
     def _render_candle(self, candle: Candle, y: int, y_axis: YAxis) -> str:
@@ -84,9 +80,7 @@ class ChartRenderer:
             else:
                 output.extend(("\n", render_line(y, highlights)))
 
-            output.extend(
-                self._render_candle(candle, y, chart.y_axis) for candle in candles
-            )
+            output.extend(self._render_candle(candle, y, chart.y_axis) for candle in candles)
 
             if graduations_on_right:
                 output.append(render_line(y, highlights))
@@ -107,8 +101,6 @@ class ChartRenderer:
                 if graduations_on_right:
                     output.append(render_empty())
 
-        output.append(
-            chart.info_bar.render(chart_data.main_candle_set, chart_data.width)
-        )
+        output.append(chart.info_bar.render(chart_data.main_candle_set, chart_data.width))
 
         return "".join(output)

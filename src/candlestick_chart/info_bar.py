@@ -29,18 +29,10 @@ class InfoBar:
         return f"{self.labels.average}: {color(fnum(candle_set.last_price))}"
 
     def _render_highest(self, candle_set: "CandleSet") -> str:
-        return (
-            f"{self.labels.highest}: {green(fnum(candle_set.max_price))}"
-            if self.labels.highest
-            else ""
-        )
+        return f"{self.labels.highest}: {green(fnum(candle_set.max_price))}" if self.labels.highest else ""
 
     def _render_lowest(self, candle_set: "CandleSet") -> str:
-        return (
-            f"{self.labels.lowest}: {red(fnum(candle_set.min_price))}"
-            if self.labels.lowest
-            else ""
-        )
+        return f"{self.labels.lowest}: {red(fnum(candle_set.min_price))}" if self.labels.lowest else ""
 
     def _render_price(self, candle_set: "CandleSet") -> str:
         price = f"{self.labels.price}: {bold(green(fnum(candle_set.last_price)))}"
@@ -53,17 +45,11 @@ class InfoBar:
             return ""
 
         variation_output = ("↖", green) if candle_set.variation > 0.0 else ("↙", red)
-        var = variation_output[1](
-            f"{variation_output[0]} {candle_set.variation:>+.2f}%"
-        )
+        var = variation_output[1](f"{variation_output[0]} {candle_set.variation:>+.2f}%")
         return f"{self.labels.variation}: {var}"
 
     def _render_volume(self, candle_set: "CandleSet") -> str:
-        return (
-            f"{self.labels.volume}: {green(fnum(int(candle_set.cumulative_volume)))}"
-            if self.labels.volume
-            else ""
-        )
+        return f"{self.labels.volume}: {green(fnum(int(candle_set.cumulative_volume)))}" if self.labels.volume else ""
 
     def render(self, candle_set: "CandleSet", available_width: int) -> str:
         return "".join(

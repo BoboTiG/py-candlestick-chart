@@ -16,11 +16,7 @@ class VolumePane:
     unicode_fill: str = constants.UNICODE_FILL
 
     def _colorize(self, candle_type: int, string: str) -> str:
-        color = (
-            self.bearish_color
-            if candle_type == CandleType.bearish
-            else self.bullish_color
-        )
+        color = self.bearish_color if candle_type == CandleType.bearish else self.bullish_color
         return truecolor(string, *color)
 
     def render(self, candle: Candle, y: int, max_volume: float) -> str:

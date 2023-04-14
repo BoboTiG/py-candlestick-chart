@@ -33,9 +33,7 @@ class YAxis:
             (min_open - min_value) / diff * height,  # min_y
         )
 
-    def render_line(
-        self, y: int, highlights: Dict[str, str | Tuple[int, int, int]] = None
-    ) -> str:
+    def render_line(self, y: int, highlights: Dict[str, str | Tuple[int, int, int]] = None) -> str:
         return (
             self.render_empty(y=y, highlights=highlights)
             if y % constants.Y_AXIS_SPACING
@@ -56,9 +54,7 @@ class YAxis:
                 value = fn_up(value * multiplier) / multiplier
         return fnum(value)
 
-    def _render_price(
-        self, y: float, highlights: Dict[str, str | Tuple[int, int, int]]
-    ) -> Tuple[bool, str]:
+    def _render_price(self, y: float, highlights: Dict[str, str | Tuple[int, int, int]]) -> Tuple[bool, str]:
         chart_data = self.chart_data
         min_value = chart_data.visible_candle_set.min_price
         max_value = chart_data.visible_candle_set.max_price
@@ -66,9 +62,7 @@ class YAxis:
 
         cell_min_length = constants.CHAR_PRECISION + constants.DEC_PRECISION + 1
         price = self._round_price(min_value + (y * (max_value - min_value) / height))
-        price_upper = self._round_price(
-            min_value + ((y + 1) * (max_value - min_value) / height)
-        )
+        price_upper = self._round_price(min_value + ((y + 1) * (max_value - min_value) / height))
 
         has_special_price = False
         custom_color: str | Tuple[int, int, int] = ""
@@ -89,9 +83,7 @@ class YAxis:
 
         return has_special_price, price
 
-    def render_empty(
-        self, y: float = None, highlights: Dict[str, str | Tuple[int, int, int]] = None
-    ) -> str:
+    def render_empty(self, y: float = None, highlights: Dict[str, str | Tuple[int, int, int]] = None) -> str:
         if highlights and y:
             has_special_price, price = self._render_price(y, highlights)
             if has_special_price:
@@ -104,8 +96,6 @@ class YAxis:
         margin = " " * constants.MARGIN_RIGHT
         return f"{cell}│{margin}"
 
-    def _render_tick(
-        self, y: int, highlights: Dict[str, str | Tuple[int, int, int]]
-    ) -> str:
+    def _render_tick(self, y: int, highlights: Dict[str, str | Tuple[int, int, int]]) -> str:
         _, price = self._render_price(y, highlights)
         return price
