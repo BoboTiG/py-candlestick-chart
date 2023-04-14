@@ -20,6 +20,7 @@ class YAxis:
         height = chart_data.height
         candle_set = chart_data.visible_candle_set
 
+        # sourcery skip: min-max-identity
         min_open = candle.open if candle.open < candle.close else candle.close
         max_open = candle.open if candle.open > candle.close else candle.close
         min_value = candle_set.min_price
