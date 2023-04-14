@@ -151,6 +151,7 @@ For all requests, here are supported fields:
 - [Basic example with stdin parsing](examples/basic-from-stdin.sh): run with `$ ./examples/basic-from-stdin.sh`
 - [Fetch candles from Binance](examples/fetch-from-binance.py): run with `$ python examples/fetch-from-binance.py`
 - [Integration with Rich](examples/integrate-with-rich.py): run with `$ python examples/integrate-with-rich.py`
+- [Using a custom chart renderer class](examples/custom-renderer-class.py): run with `$ python examples/custom-renderer-class.py`
 
 ## Binary 
 
