@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Dict, Iterable, Tuple
+from typing import TYPE_CHECKING, Dict, Iterable, Tuple, Type
 
 from .candle import Candles
 from .chart_data import ChartData
@@ -22,9 +22,14 @@ class Chart:
     )
 
     def __init__(
-        self, candles: Candles, title: str = "My chart", width: int = 0, height: int = 0
+        self,
+        candles: Candles,
+        title: str = "My chart",
+        width: int = 0,
+        height: int = 0,
+        renderer_cls: Type[ChartRenderer] = ChartRenderer,
     ) -> None:
-        self.renderer = ChartRenderer()
+        self.renderer = renderer_cls()
         self.chart_data = ChartData(candles, width=width, height=height)
         self.y_axis = YAxis(self.chart_data)
         self.info_bar = InfoBar(title)
