@@ -6,7 +6,7 @@ on:
       branch:
         description: "The branch, tag or SHA to release from"
         required: true
-        default: "master"
+        default: "main"
 
 jobs:
   pure-built-distributions:
@@ -14,11 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.event.inputs.branch }}
       - name: Install Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
       - name: Install build dependencies
         run: python -m pip install -U pip setuptools wheel
       - name: Build wheels
@@ -33,11 +33,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.event.inputs.branch }}
       - name: Install Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
       - name: Build source distribution
         run: python setup.py sdist
       - name: Store the source distribution
