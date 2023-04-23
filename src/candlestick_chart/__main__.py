@@ -30,7 +30,7 @@ def get_args() -> Namespace:
         required=True,
     )
     parser.add_argument("-f", "--file", help="[MODE:*-file] File to read candles from.")
-    parser.add_argument("--chart-name", help="Sets the chart name.")
+    parser.add_argument("--chart-name", default="", help="Sets the chart name.")
     parser.add_argument("--bear-color", help="Sets the descending candles color in hexadecimal.")
     parser.add_argument("--bull-color", help="Sets the ascending candles color in hexadecimal.")
     parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
