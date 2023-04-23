@@ -33,5 +33,5 @@ jobs:
           check-latest: true
           python-version: ${{ matrix.python.runs-on }}
       - run: python -m pip install -U pip wheel
-      - run: python -m pip install -r dev-requirements.txt
+      - run: python -m pip install -r requirements-dev.txt
       - run: python -m pytest
