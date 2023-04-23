@@ -8,10 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased] - 202x-xx-xx
 
 ### Added
-- 
+- Support for Python 3.12
+- CI to run unit tests
+- Tests for the CLI entry point
 
 ### Changed
-- 
+- Set the default chart name to a blank string in the CLI (fixes [#9])
+- Use `shutil.get_terminal_size()` instead of `os.get_terminal_size()` to be able to run tests without hitting `OSError: [Errno 25] Inappropriate ioctl for device`
+- Fix Mypy error `PEP 484 prohibits implicit Optional`
 
 ### Removed
 - 
@@ -113,3 +117,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#3]: https://github.com/BoboTiG/py-candlestick-chart/issues/3
 [#4]: https://github.com/BoboTiG/py-candlestick-chart/issues/4
 [#5]: https://github.com/BoboTiG/py-candlestick-chart/issues/5
+[#9]: https://github.com/BoboTiG/py-candlestick-chart/issues/9

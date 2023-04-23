@@ -1,4 +1,4 @@
-from os import get_terminal_size
+from shutil import get_terminal_size
 
 from . import constants
 from .candle import Candles

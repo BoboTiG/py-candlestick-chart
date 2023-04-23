@@ -33,7 +33,7 @@ class YAxis:
             (min_open - min_value) / diff * height,  # min_y
         )
 
-    def render_line(self, y: int, highlights: Dict[str, str | Tuple[int, int, int]] = None) -> str:
+    def render_line(self, y: int, highlights: Dict[str, str | Tuple[int, int, int]] | None = None) -> str:
         return (
             self.render_empty(y=y, highlights=highlights)
             if y % constants.Y_AXIS_SPACING
@@ -83,7 +83,9 @@ class YAxis:
 
         return has_special_price, price
 
-    def render_empty(self, y: float = None, highlights: Dict[str, str | Tuple[int, int, int]] = None) -> str:
+    def render_empty(
+        self, y: float | None = None, highlights: Dict[str, str | Tuple[int, int, int]] | None = None
+    ) -> str:
         if highlights and y:
             has_special_price, price = self._render_price(y, highlights)
             if has_special_price:
