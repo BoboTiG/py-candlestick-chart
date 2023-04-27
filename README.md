@@ -21,6 +21,7 @@ Note: not tested on macOS, nor Windows (it will likely fail to render colors).
     - [Read CSV from file](#read-csv-from-file)
     - [Read JSON from file](#read-json-from-file)
     - [Read from stdin](#read-from-stdin)
+  - [Developers](#developers)
 
 ## Features
 
@@ -197,4 +198,26 @@ echo '[
     --chart-name='My BTC Chart' \
     --bear-color='#b967ff' \
     --bull-color='ff6b99'
+```
+
+## Developers
+
+Setup:
+
+```shell
+python -m venv venv
+. venv/bin/activate
+python -m pip install -U pip
+```
+
+Install:
+
+```shell
+python -m pip install -e '.[test]'
+```
+
+Test:
+
+```shell
+python -m pytest
 ```

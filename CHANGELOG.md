@@ -8,10 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased] - 202x-xx-xx
 
 ### Added
-- 
+- CI to automatically publish releases on tag creation
 
 ### Changed
-- 
+- Level up the packaging using `hatchling`
 
 ### Removed
 - 

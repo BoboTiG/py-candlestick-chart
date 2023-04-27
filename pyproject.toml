@@ -1,0 +1,150 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "candlestick-chart"
+description = "Draw candlesticks charts right into your terminal, using Python!"
+readme = "README.md"
+requires-python = ">= 3.10"
+authors = [
+  { name = "Mickaël 'Tiger-222' Schoentgen", email="contact@tiger-222.fr" },
+]
+maintainers = [
+  { name = "Mickaël 'Tiger-222' Schoentgen", email="contact@tiger-222.fr" },
+]
+license = { file = "LICENSE" }
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Education",
+  "Intended Audience :: End Users/Desktop",
+  "Intended Audience :: Financial and Insurance Industry",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Multimedia :: Graphics :: Viewers",
+  "Topic :: Office/Business :: Financial",
+  "Topic :: Scientific/Engineering :: Visualization",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Topic :: Software Development :: User Interfaces",
+  "Topic :: Terminals",
+]
+keywords = [
+    "candle",
+    "candlestick",
+    "chart",
+    "cli",
+    "console",
+    "crypto",
+    "stock",
+    "stock-market",
+    "options",
+    "terminal",
+    "trading",
+]
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://pypi.org/project/py-candlestick-chart"
+Changelog = "https://github.com/BoboTiG/py-candlestick-chart/blob/main/CHANGELOG.md"
+Source = "https://github.com/BoboTiG/py-candlestick-chart"
+Sponsor = "https://github.com/sponsors/BoboTiG"
+Tracker = "https://github.com/BoboTiG/py-candlestick-chart/issues"
+"Released Versions" = "https://github.com/BoboTiG/py-candlestick-chart/releases"
+
+[project.scripts]
+candlestick-chart = "candlestick_chart.__main__:main"
+
+[project.optional-dependencies]
+test = [
+  "black",
+  "flake8-pyproject",
+  "isort",
+  "mypy",
+  "pytest",
+  "pytest-cov",
+  "requests",
+  "rich",
+  "types-requests",
+]
+dev = [
+  "build",
+  "twine",
+]
+
+[tool.hatch.version]
+path = "src/candlestick_chart/__init__.py"
+
+[tool.hatch.build]
+skip-excluded-dirs = true
+
+[tool.hatch.build.targets.sdist]
+only-include = [
+  "CHANGELOG.md",
+  "examples",
+  "src",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = [
+  "src/candlestick_chart",
+]
+
+[tool.black]
+target-version = ["py310"]
+line-length = 120
+safe = true
+
+[tool.flake8]
+max-line-length = 120
+ignore = [
+  "E203",  # Whitespace before ':', but it's not PEP 8 compliant
+  "W503",  # Line break before binary operator, but it's not PEP 8 compliant
+]
+
+[tool.isort]
+py_version = 310
+line_length = 120
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+
+[tool.mypy]
+# Ensure we know what we do
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_unused_configs = true
+
+# Imports management
+ignore_missing_imports = true
+follow_imports = "skip"
+
+# Ensure full coverage
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+disallow_untyped_calls = true
+
+# Restrict dynamic typing (a little)
+# e.g. `x: List[Any]` or x: List`
+# disallow_any_generics = true
+
+strict_equality = true
+
+[tool.pytest.ini_options]
+pythonpath = "src"
+addopts = """
+  --showlocals
+  --strict-markers
+  -r fE
+  -vvv
+  --cov=candlestick_chart
+  --cov-report=term-missing
+"""

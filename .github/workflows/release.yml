@@ -1,67 +1,33 @@
 name: Release
 
 on:
+  push:
+    tags:
+      - '*'
   workflow_dispatch:
-    inputs:
-      branch:
-        description: "The branch, tag or SHA to release from"
-        required: true
-        default: "main"
 
 jobs:
-  pure-built-distributions:
-    name: Build pure wheels
+  release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.inputs.branch }}
       - name: Install Python
         uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+          cache: pip
       - name: Install build dependencies
-        run: python -m pip install -U pip setuptools wheel
-      - name: Build wheels
-        run: python setup.py bdist_wheel
-      - uses: actions/upload-artifact@v3
-        with:
-          name: python-package-distributions
-          path: ./dist/*.whl
-
-  source-distribution:
-    name: Build source distribution
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.inputs.branch }}
-      - name: Install Python
-        uses: actions/setup-python@v4
-      - name: Build source distribution
-        run: python setup.py sdist
-      - name: Store the source distribution
-        uses: actions/upload-artifact@v3
-        with:
-          name: python-package-distributions
-          path: dist
-          retention-days: 4
-
-  publish:
-    needs:
-      - pure-built-distributions
-      - source-distribution
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download all the dists
-        uses: actions/download-artifact@v3
-        with:
-          name: python-package-distributions
-          path: dist/
+        run: |
+          python -m pip install -U pip 
+          python -m pip install -e '.[dev]'
+      - name: Build
+        run: python -m build
+      - name: Check
+        run: twine check --strict dist/*
       - name: What will we publish?
         run: ls -l dist
       - name: Publish
-        if: github.event.inputs.branch != ''
         uses: pypa/gh-action-pypi-publish@master
         with:
           user: __token__

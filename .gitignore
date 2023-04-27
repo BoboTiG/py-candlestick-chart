@@ -1,4 +1,5 @@
 build/
+.coverage
 dist/
 *.egg-info/
 .mypy_cache/
