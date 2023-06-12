@@ -22,5 +22,6 @@ modifications, that you make.
 
 from .candle import Candle
 from .chart import Chart
+from .utils import fnum
 
-__all__ = ("Candle", "Chart")
+__all__ = ("Candle", "Chart", "fnum")

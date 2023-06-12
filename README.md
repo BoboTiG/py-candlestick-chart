@@ -43,15 +43,15 @@ $ python -m pip install -U candlestick-chart
 ## Demonstration
 
 ```python
-from candlestick_chart import Candle, Chart
+from candlestick_chart import Candle, Chart, fnum
 
 # Add some candles
 candles = [
-    Candle(133.520004, 133.610001, 126.760002, 129.410004),
-    Candle(128.889999, 131.740005, 128.429993, 131.009995),
-    Candle(127.720001, 131.050003, 126.379997, 126.599998),
-    Candle(128.360001, 131.630005, 127.860001, 130.919998),
-    Candle(132.429993, 132.630005, 130.229996, 132.050003),
+    Candle(open=133.520004, close=133.610001, high=126.760002, low=129.410004),
+    Candle(open=128.889999, close=131.740005, high=128.429993, low=131.009995),
+    Candle(open=127.720001, close=131.050003, high=126.379997, low=126.599998),
+    Candle(open=128.360001, close=131.630005, high=127.860001, low=130.919998),
+    Candle(open=132.429993, close=132.630005, high=130.229996, low=132.050003),
 ]
 
 # Create and display the chart
@@ -88,11 +88,10 @@ chart.update_candles(candles[:3])
 chart.update_candles(candles[:3], reset=True)
 
 # Set a custom color at price 52,348.63
-# from candlestick_chart.utils import fnum
-chart.set_highlight(fnum(52,348.63), "red")
-chart.set_highlight(fnum(52,348.63), (255, 0, 0))
-chart.set_highlight(fnum(52,348.63), "91m")
-chart.set_highlight(fnum(52,348.63), "91;47m")
+chart.set_highlight(fnum(52_348.63), "red")
+chart.set_highlight(fnum(52_348.63), (255, 0, 0))
+chart.set_highlight(fnum(52_348.63), "91m")
+chart.set_highlight(fnum(52_348.63), "91;47m")
 
 chart.draw()
 ```

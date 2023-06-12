@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Level up the packaging using `hatchling`
+- Updated README's code example (fixes [#13])
 
 ### Removed
 - 
@@ -127,3 +128,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#4]: https://github.com/BoboTiG/py-candlestick-chart/issues/4
 [#5]: https://github.com/BoboTiG/py-candlestick-chart/issues/5
 [#9]: https://github.com/BoboTiG/py-candlestick-chart/issues/9
+[#13]: https://github.com/BoboTiG/py-candlestick-chart/issues/13
