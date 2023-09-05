@@ -42,7 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Allow to pass a blank color to `color()`, it will return the text unchanged
-- Refactored price hightlights, it should now highlight price that would be hidden by a slightly upper value (like 1.025 being hidden because that exact price is not available, but it is surrounded by 1.02, and 1.03, then it will take the place of 1.02)
+- Refactored price highlights, it should now highlight price that would be hidden by a slightly upper value (like 1.025 being hidden because that exact price is not available, but it is surrounded by 1.02, and 1.03, then it will take the place of 1.02)
 - Better-looking Y-axis style (when on the left-side: `PRICE │―` → `PRICE ┤`, and on the right-side: `│― PRICE` → `├ PRICE`)
 
 ## [2.5.0] - 2022-10-19
@@ -85,7 +85,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Introduced `constants.Y_AXIS_SPACING` to give control Y-axis spacing between graduations (defaults to `4`, reduce to display more graduations, and set a higher number to display less graduations)
 
 ### Changed
-- Constant changes are now taken into account in real-time, it allowes to tweak the chart appearence after having imported the module
+- Constant changes are now taken into account in real-time, it allows to tweak the chart appearance after having imported the module
 - Always show the volume pane when it is enabled
 
 ## [2.1.0] - 2022-07-20
@@ -101,7 +101,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.0.0] - 2022-05-22
 
 ### Changed
-- Fixed values computation in the info bar by using the whole candle set rather thant only the visible one (closes [#2])
+- Fixed values computation in the info bar by using the whole candle set rather than only the visible one (closes [#2])
 - Changed the `Chart.update_candles()` behavior: it will update current candles by default, and now accepts a `reset=True` optional argument to actually erase all previous candles first (closes [#3])
 
 ## [1.0.0] - 2022-05-21
