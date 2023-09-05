@@ -21,8 +21,8 @@ def run(args: list[str]) -> None:
         assert main() == 0
 
 
-@pytest.mark.parametrize("additionnal_arg", OPTIONAL_ARGS)
-def test_mode_stdin(additionnal_arg: str):
+@pytest.mark.parametrize("additional_arg", OPTIONAL_ARGS)
+def test_mode_stdin(additional_arg: str):
     data = StringIO(
         """[
   {
@@ -40,16 +40,16 @@ def test_mode_stdin(additionnal_arg: str):
 ]"""
     )
     with patch.object(sys, "stdin", data):
-        run(["--mode=stdin", additionnal_arg])
+        run(["--mode=stdin", additional_arg])
 
 
-@pytest.mark.parametrize("additionnal_arg", OPTIONAL_ARGS)
-def test_mode_csv_file(additionnal_arg: str):
+@pytest.mark.parametrize("additional_arg", OPTIONAL_ARGS)
+def test_mode_csv_file(additional_arg: str):
     file = EXAMPLES / "BTC-USD.csv"
-    run(["--mode=csv-file", f"--file={file}", additionnal_arg])
+    run(["--mode=csv-file", f"--file={file}", additional_arg])
 
 
-@pytest.mark.parametrize("additionnal_arg", OPTIONAL_ARGS)
-def test_mode_json_file(additionnal_arg: str):
+@pytest.mark.parametrize("additional_arg", OPTIONAL_ARGS)
+def test_mode_json_file(additional_arg: str):
     file = EXAMPLES / "BTC-chart.json"
-    run(["--mode=json-file", f"--file={file}", additionnal_arg])
+    run(["--mode=json-file", f"--file={file}", additional_arg])

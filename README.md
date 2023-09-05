@@ -12,7 +12,7 @@ Note: not tested on macOS, nor Windows (it will likely fail to render colors).
 **Table of contents**:
 - [Python Candlesticks Chart](#python-candlesticks-chart)
   - [Features](#features)
-  - [Intallation](#intallation)
+  - [Installation](#installation)
   - [Demonstration](#demonstration)
 - [Binary Usage](#binary-usage)
 - [Examples](#examples)
@@ -32,7 +32,7 @@ Note: not tested on macOS, nor Windows (it will likely fail to render colors).
 - Exact same API as the [Rust version](https://github.com/Julien-R44/cli-candlestick-chart), plus some [sugar](#demonstration)
 - Simple installation, no external dependencies
 
-## Intallation
+## Installation
 
 As simple as:
 
