@@ -43,7 +43,7 @@ $ python -m pip install -U candlestick-chart
 ## Demonstration
 
 ```python
-from candlestick_chart import Candle, Chart, fnum
+from candlestick_chart import Candle, Chart
 
 # Add some candles
 candles = [
