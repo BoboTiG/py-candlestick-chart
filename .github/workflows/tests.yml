@@ -19,8 +19,10 @@ jobs:
           - emoji: 🪟
             runs-on: [windows-latest]
         python:
+          - name: CPython 3.13
+            runs-on: "3.13-dev"
           - name: CPython 3.12
-            runs-on: "3.12-dev"
+            runs-on: "3.12"
           - name: CPython 3.11
             runs-on: "3.11"
           - name: CPython 3.10
