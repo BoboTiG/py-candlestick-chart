@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Level up the packaging using `hatchling`
 - Pin all requirements
 - Updated README's code example (fixes [#13])
+- Fixed typos using `codespell` ([#15] by @kianmeng)
 
 ### Removed
 - `black`, `flake8`, and `isort`, requirements for the code quality
@@ -147,3 +148,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#5]: https://github.com/BoboTiG/py-candlestick-chart/issues/5
 [#9]: https://github.com/BoboTiG/py-candlestick-chart/issues/9
 [#13]: https://github.com/BoboTiG/py-candlestick-chart/issues/13
+[#15]: https://github.com/BoboTiG/py-candlestick-chart/pull/15
