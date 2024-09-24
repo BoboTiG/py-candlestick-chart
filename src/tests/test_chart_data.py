@@ -12,7 +12,7 @@ def chart_data() -> ChartData:
     return ChartData([Candle(open=1, high=1, low=1, close=1)], width=100, height=50)
 
 
-def test_compute_height_take_into_account_constant_change(chart_data):
+def test_compute_height_take_into_account_constant_change(chart_data: ChartData) -> None:
     volume_pane = VolumePane(0, enabled=False)
     chart_data.compute_height(volume_pane)
     original_height = chart_data.height

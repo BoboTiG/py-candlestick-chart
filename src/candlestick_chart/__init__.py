@@ -1,5 +1,4 @@
-"""
-Draw candlesticks charts right into your terminal.
+"""Draw candlesticks charts right into your terminal.
 
 This module is maintained by Mickaël Schoentgen <contact@tiger-222.fr>.
 

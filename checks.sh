@@ -1,8 +1,7 @@
 #!/bin/bash
 set -eu
 
-python -m isort src examples
-python -m black --line-length=120 src examples
-python -m flake8 src examples
-python -m mypy src examples --exclude tests
+python -m ruff format src examples
+python -m ruff check --fix --unsafe-fixes src examples
+python -m mypy src examples
 echo "ok"

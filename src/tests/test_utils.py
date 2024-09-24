@@ -1,4 +1,5 @@
 from io import StringIO
+from pathlib import Path
 from unittest.mock import patch
 
 import pytest
@@ -7,12 +8,11 @@ from candlestick_chart import Candle, utils
 
 
 @pytest.mark.parametrize(
-    "value, expected",
+    ("value", "expected"),
     [
         (0, "0"),
         (0.0, "0.00"),
         (123456789, "123,456,789"),
-        (1.23456789, "1.23"),
         (1.23456789, "1.23"),
         (1234.56789, "1,234.57"),
         (1.0, "1.00"),
@@ -28,21 +28,21 @@ from candlestick_chart import Candle, utils
         (0.123456789, "0.1235"),
     ],
 )
-def test_fnum(value, expected):
+def test_fnum(value: float, expected: str) -> None:
     assert utils.fnum(value) == expected
     assert utils.fnum(str(value)) == expected
     if value != 0.0:
         assert utils.fnum(value * -1) == f"-{expected}"
 
 
-def test_fnum_precision():
+def test_fnum_precision() -> None:
     with patch("candlestick_chart.constants.PRECISION", 0):
         assert utils.fnum(1.0) == "1"
     with patch("candlestick_chart.constants.PRECISION", 10):
         assert utils.fnum(1.0) == "1.0000000000"
 
 
-def test_fnum_precision_small():
+def test_fnum_precision_small() -> None:
     with patch("candlestick_chart.constants.PRECISION_SMALL", 0):
         assert utils.fnum(0.123456789) == "0"
     with patch("candlestick_chart.constants.PRECISION_SMALL", 6):
@@ -50,18 +50,18 @@ def test_fnum_precision_small():
 
 
 @pytest.mark.parametrize(
-    "code, expected",
+    ("code", "expected"),
     [
         ("#b967ff", (185, 103, 255)),
         ("ff6b99", (255, 107, 153)),
     ],
 )
-def test_hexa_to_rgb(code, expected):
+def test_hexa_to_rgb(code: str, expected: tuple[int, int, int]) -> None:
     assert utils.hexa_to_rgb(code) == expected
 
 
-def test_parse_candles_from_csv(data):
-    file = data / "BTC-USD.csv"
+def test_parse_candles_from_csv(data: Path) -> None:
+    file = str(data / "BTC-USD.csv")
     candles = utils.parse_candles_from_csv(file)
     assert len(candles) == 312
     assert candles[0] == Candle(
@@ -82,8 +82,8 @@ def test_parse_candles_from_csv(data):
     )
 
 
-def test_parse_candles_from_json(data):
-    file = data / "BTC-chart.json"
+def test_parse_candles_from_json(data: Path) -> None:
+    file = str(data / "BTC-chart.json")
     candles = utils.parse_candles_from_json(file)
     assert len(candles) == 2
     assert candles[0] == Candle(
@@ -104,7 +104,7 @@ def test_parse_candles_from_json(data):
     )
 
 
-def test_parse_candles_from_stdin(monkeypatch):
+def test_parse_candles_from_stdin(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(
         "sys.stdin",
         StringIO(
@@ -121,7 +121,7 @@ def test_parse_candles_from_stdin(monkeypatch):
                     "low": 29091.181641,
                     "close": 32127.267578
                 }
-            ]"""
+            ]""",
         ),
     )
     candles = utils.parse_candles_from_stdin()

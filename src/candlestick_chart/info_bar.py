@@ -69,8 +69,8 @@ class InfoBar:
                             self._render_average(candle_set),
                             self._render_volume(candle_set),
                         ),
-                    )
+                    ),
                 ),
                 "\n",
-            )
+            ),
         )

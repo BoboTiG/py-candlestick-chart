@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from math import ceil
-from typing import Tuple
 
 from . import constants
 from .candle import Candle, CandleType
@@ -11,8 +10,8 @@ from .colors import truecolor
 class VolumePane:
     height: int
     enabled: bool = True
-    bearish_color: Tuple[int, int, int] = (234, 74, 90)
-    bullish_color: Tuple[int, int, int] = (52, 208, 88)
+    bearish_color: tuple[int, int, int] = (234, 74, 90)
+    bullish_color: tuple[int, int, int] = (52, 208, 88)
     unicode_fill: str = constants.UNICODE_FILL
 
     def _colorize(self, candle_type: int, string: str) -> str:

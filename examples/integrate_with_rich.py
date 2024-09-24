@@ -40,13 +40,16 @@ layout = make_layout()
 layout["candlesticks-static"].update(Panel(chart_static))
 layout["candlesticks-dynamic"].update(Panel(chart_dynamic))
 
-with Live(layout, refresh_per_second=120):
-    for candle in candles:
-        chart_dynamic.update_candles([candle])
-        sleep(0.03)
+use_reset = False
 
-    # candles_count = 0
-    # while candles_count <= len(candles):
-    #     chart_dynamic.update_candles(candles[:candles_count], reset=True)
-    #     candles_count += 1
-    #     sleep(0.03)
+with Live(layout, refresh_per_second=120):
+    if use_reset:
+        candles_count = 0
+        while candles_count <= len(candles):
+            chart_dynamic.update_candles(candles[:candles_count], reset=True)
+            candles_count += 1
+            sleep(0.03)
+    else:
+        for candle in candles:
+            chart_dynamic.update_candles([candle])
+            sleep(0.03)

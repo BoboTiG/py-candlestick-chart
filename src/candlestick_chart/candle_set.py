@@ -47,10 +47,8 @@ class CandleSet:
             volume = candle.volume
             cumulative_volume += volume
             average += candle.close
-            if candle.high > max_price:
-                max_price = candle.high
-            if candle.low < min_price:
-                min_price = candle.low
+            max_price = max(candle.high, max_price)
+            min_price = min(candle.low, min_price)
             if volume > max_volume:
                 max_volume = volume
             elif volume < min_volume:

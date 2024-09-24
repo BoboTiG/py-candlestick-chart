@@ -1,4 +1,4 @@
-from typing import Any, List, NamedTuple
+from typing import NamedTuple
 
 
 class CandleType(NamedTuple):
@@ -9,7 +9,7 @@ class CandleType(NamedTuple):
 class Candle:
     __slots__ = ("open", "close", "high", "low", "volume", "timestamp", "type")
 
-    def __init__(self, **kwargs: Any) -> None:
+    def __init__(self, **kwargs: float) -> None:
         self.open = float(kwargs["open"])
         self.high = float(kwargs["high"])
         self.low = float(kwargs["low"])
@@ -20,7 +20,7 @@ class Candle:
 
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, Candle):
-            raise NotImplementedError()
+            raise NotImplementedError
 
         return (
             self.open == other.open
@@ -46,4 +46,4 @@ class Candle:
         )
 
 
-Candles = List[Candle]
+Candles = list[Candle]

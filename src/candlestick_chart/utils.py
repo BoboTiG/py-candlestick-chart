@@ -1,6 +1,7 @@
 import re
+from collections.abc import Iterator
 from pathlib import Path
-from typing import Any, Iterator, Match, Tuple
+from typing import Any
 
 from . import constants
 from .candle import Candle, Candles
@@ -9,12 +10,12 @@ from .candle import Candle, Candles
 REPLACE_CONSECUTIVE_ZEROES = re.compile(r"(0\.)(0{4,})(.{4}).*").sub
 
 
-def fnum_replace_consecutive_zeroes(match: Match[str]) -> str:
+def fnum_replace_consecutive_zeroes(match: re.Match[str]) -> str:
     p1, p2, p3 = match.groups()
     return "".join([p1, f"⦗0×{len(p2)}⦘", p3])
 
 
-def fnum(value: int | float | str) -> str:
+def fnum(value: float | str) -> str:
     if isinstance(value, str):
         try:
             value = int(value)
@@ -30,7 +31,7 @@ def fnum(value: int | float | str) -> str:
     return formatted if "0×" in formatted else f"{value:.{constants.PRECISION_SMALL}f}"
 
 
-def hexa_to_rgb(hex_code: str) -> Tuple[int, int, int]:
+def hexa_to_rgb(hex_code: str) -> tuple[int, int, int]:
     hex_code = hex_code.lstrip("#")
     r = int(hex_code[:2], 16)
     g = int(hex_code[2:4], 16)

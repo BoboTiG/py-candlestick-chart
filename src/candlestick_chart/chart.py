@@ -1,4 +1,5 @@
-from typing import TYPE_CHECKING, Dict, Iterable, Tuple, Type
+from collections.abc import Iterable
+from typing import TYPE_CHECKING
 
 from .candle import Candles
 from .chart_data import ChartData
@@ -27,7 +28,7 @@ class Chart:
         title: str = "My chart",
         width: int = 0,
         height: int = 0,
-        renderer_cls: Type[ChartRenderer] = ChartRenderer,
+        renderer_cls: type[ChartRenderer] = ChartRenderer,
     ) -> None:
         self.renderer = renderer_cls()
         self.chart_data = ChartData(candles, width=width, height=height)
@@ -36,7 +37,7 @@ class Chart:
         self.volume_pane = VolumePane(int(self.chart_data.height / 6))
 
         # A dict of price -> color to display custom colors on specific prices on the Y-axis
-        self.highlights: Dict[str, str | Tuple[int, int, int]] = {}
+        self.highlights: dict[str, str | tuple[int, int, int]] = {}
 
     def __rich_console__(self, console: "Console", options: "ConsoleOptions") -> Iterable[str]:
         from rich.ansi import AnsiDecoder
@@ -54,7 +55,7 @@ class Chart:
 
     def draw(self) -> None:
         """Draws the chart by outputting multiples strings in the terminal."""
-        print(self._render())
+        print(self._render())  # noqa: T201
 
     def set_bear_color(self, r: int, g: int, b: int) -> None:
         """Set the color of the bearish candle.
@@ -74,7 +75,7 @@ class Chart:
         """
         setattr(self.info_bar.labels, label, value)
 
-    def set_highlight(self, price: str, color: str | Tuple[int, int, int]) -> None:
+    def set_highlight(self, price: str, color: str | tuple[int, int, int]) -> None:
         """Set a specific `color` for `price` in the Y-axis.
         `price` must be a string to be able to compare to real values
         and because comparing floats would almost never match.
@@ -85,6 +86,7 @@ class Chart:
             >>> chart.set_highlight(fnum(52,348.63), (255, 0, 0))
             >>> chart.set_highlight(fnum(52,348.63), "91m")
             >>> chart.set_highlight(fnum(52,348.63), "91;47m")
+
         """
         if color:
             self.highlights[price] = color
@@ -107,7 +109,7 @@ class Chart:
         """
         self.volume_pane.bullish_color = r, g, b
 
-    def set_volume_pane_enabled(self, enabled: bool) -> None:
+    def set_volume_pane_enabled(self, enabled: bool) -> None:  # noqa: FBT001
         """Hide or show the volume pane."""
         self.volume_pane.enabled = enabled
 

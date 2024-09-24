@@ -146,12 +146,12 @@ For all requests, here are supported fields:
 
 ## API 
 
-- [Basic example with CSV parsing](examples/basic-from-csv-file.py): run with `$ python examples/basic-from-csv-file.py`
-- [Basic example with JSON parsing](examples/basic-from-json-file.py): run with `$ python examples/basic-from-json-file.py`
-- [Basic example with stdin parsing](examples/basic-from-stdin.sh): run with `$ ./examples/basic-from-stdin.sh`
-- [Fetch candles from Binance](examples/fetch-from-binance.py): run with `$ python examples/fetch-from-binance.py`
-- [Integration with Rich](examples/integrate-with-rich.py): run with `$ python examples/integrate-with-rich.py`
-- [Using a custom chart renderer class](examples/custom-renderer-class.py): run with `$ python examples/custom-renderer-class.py`
+- [Basic example with CSV parsing](examples/basic_from_csv_file.py): run with `$ python examples/basic_from_csv_file.py`
+- [Basic example with JSON parsing](examples/basic_from_json_file.py): run with `$ python examples/basic_from_json_file.py`
+- [Basic example with stdin parsing](examples/basic_from_stdin.sh): run with `$ ./examples/basic_from_stdin.sh`
+- [Fetch candles from Binance](examples/fetch_from_binance.py): run with `$ python examples/fetch_from_binance.py`
+- [Integration with Rich](examples/integrate_with_rich.py): run with `$ python examples/integrate_with_rich.py`
+- [Using a custom chart renderer class](examples/custom_renderer_class.py): run with `$ python examples/custom_renderer_class.py`
 
 ## Binary 
 

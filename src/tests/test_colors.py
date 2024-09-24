@@ -4,7 +4,7 @@ from candlestick_chart.colors import color
 
 
 @pytest.mark.parametrize(
-    "custom_color, expected",
+    ("custom_color", "expected"),
     [
         ("", "𓅂"),
         ("red", "\x1b[91m𓅂\x1b[00m"),
@@ -15,5 +15,5 @@ from candlestick_chart.colors import color
         ("91;47m", "\x1b[91;47m𓅂\x1b[00m"),
     ],
 )
-def test_color(custom_color, expected):
+def test_color(custom_color: str, expected: str) -> None:
     assert color("𓅂", custom_color) == expected

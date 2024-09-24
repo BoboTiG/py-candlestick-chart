@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from math import ceil, floor
-from typing import TYPE_CHECKING, List, Tuple
+from typing import TYPE_CHECKING
 
 from . import constants
 from .candle import Candle, CandleType
@@ -13,8 +13,8 @@ if TYPE_CHECKING:
 
 @dataclass(slots=True)
 class ChartRenderer:
-    bearish_color: Tuple[int, int, int] = (234, 74, 90)
-    bullish_color: Tuple[int, int, int] = (52, 208, 88)
+    bearish_color: tuple[int, int, int] = (234, 74, 90)
+    bullish_color: tuple[int, int, int] = (52, 208, 88)
 
     def _colorize(self, candle_type: int, string: str) -> str:
         color = self.bearish_color if candle_type == CandleType.bearish else self.bullish_color
@@ -64,7 +64,7 @@ class ChartRenderer:
         return self._colorize(candle.type, output)
 
     def render(self, chart: "Chart") -> str:
-        output: List[str] = []
+        output: list[str] = []
         chart_data = chart.chart_data
         chart_data.compute_height(chart.volume_pane)
         candle_set = chart_data.visible_candle_set

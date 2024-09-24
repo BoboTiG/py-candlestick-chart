@@ -22,7 +22,7 @@ def run(args: list[str]) -> None:
 
 
 @pytest.mark.parametrize("additional_arg", OPTIONAL_ARGS)
-def test_mode_stdin(additional_arg: str):
+def test_mode_stdin(additional_arg: str) -> None:
     data = StringIO(
         """[
   {
@@ -37,19 +37,19 @@ def test_mode_stdin(additional_arg: str):
     "low": 29091.181641,
     "close": 32127.267578
   }
-]"""
+]""",
     )
     with patch.object(sys, "stdin", data):
         run(["--mode=stdin", additional_arg])
 
 
 @pytest.mark.parametrize("additional_arg", OPTIONAL_ARGS)
-def test_mode_csv_file(additional_arg: str):
+def test_mode_csv_file(additional_arg: str) -> None:
     file = EXAMPLES / "BTC-USD.csv"
     run(["--mode=csv-file", f"--file={file}", additional_arg])
 
 
 @pytest.mark.parametrize("additional_arg", OPTIONAL_ARGS)
-def test_mode_json_file(additional_arg: str):
+def test_mode_json_file(additional_arg: str) -> None:
     file = EXAMPLES / "BTC-chart.json"
     run(["--mode=json-file", f"--file={file}", additional_arg])

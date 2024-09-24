@@ -1,6 +1,7 @@
 import math
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Callable, Dict, Tuple
+from typing import TYPE_CHECKING
 
 from . import constants
 from .candle import Candle
@@ -15,14 +16,14 @@ if TYPE_CHECKING:
 class YAxis:
     chart_data: "ChartData"
 
-    def price_to_heights(self, candle: Candle) -> Tuple[float, ...]:
+    def price_to_heights(self, candle: Candle) -> tuple[float, ...]:
         chart_data = self.chart_data
         height = chart_data.height
         candle_set = chart_data.visible_candle_set
 
         # sourcery skip: min-max-identity
-        min_open = candle.open if candle.open < candle.close else candle.close
-        max_open = candle.open if candle.open > candle.close else candle.close
+        min_open = min(candle.close, candle.open)
+        max_open = max(candle.close, candle.open)
         min_value = candle_set.min_price
         diff = (candle_set.max_price - min_value) or 1
 
@@ -33,7 +34,7 @@ class YAxis:
             (min_open - min_value) / diff * height,  # min_y
         )
 
-    def render_line(self, y: int, highlights: Dict[str, str | Tuple[int, int, int]] | None = None) -> str:
+    def render_line(self, y: int, highlights: dict[str, str | tuple[int, int, int]] | None = None) -> str:
         return (
             self.render_empty(y=y, highlights=highlights)
             if y % constants.Y_AXIS_SPACING
@@ -54,7 +55,7 @@ class YAxis:
                 value = fn_up(value * multiplier) / multiplier
         return fnum(value)
 
-    def _render_price(self, y: float, highlights: Dict[str, str | Tuple[int, int, int]]) -> Tuple[bool, str]:
+    def _render_price(self, y: float, highlights: dict[str, str | tuple[int, int, int]]) -> tuple[bool, str]:
         chart_data = self.chart_data
         min_value = chart_data.visible_candle_set.min_price
         max_value = chart_data.visible_candle_set.max_price
@@ -65,7 +66,7 @@ class YAxis:
         price_upper = self._round_price(min_value + ((y + 1) * (max_value - min_value) / height))
 
         has_special_price = False
-        custom_color: str | Tuple[int, int, int] = ""
+        custom_color: str | tuple[int, int, int] = ""
 
         for target_price, target_color in highlights.items():
             if not (price <= target_price < price_upper):
@@ -84,7 +85,9 @@ class YAxis:
         return has_special_price, price
 
     def render_empty(
-        self, y: float | None = None, highlights: Dict[str, str | Tuple[int, int, int]] | None = None
+        self,
+        y: float | None = None,
+        highlights: dict[str, str | tuple[int, int, int]] | None = None,
     ) -> str:
         if highlights and y:
             has_special_price, price = self._render_price(y, highlights)
@@ -98,6 +101,6 @@ class YAxis:
         margin = " " * constants.MARGIN_RIGHT
         return f"{cell}│{margin}"
 
-    def _render_tick(self, y: int, highlights: Dict[str, str | Tuple[int, int, int]]) -> str:
+    def _render_tick(self, y: int, highlights: dict[str, str | tuple[int, int, int]]) -> str:
         _, price = self._render_price(y, highlights)
         return price

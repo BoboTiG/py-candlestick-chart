@@ -1,5 +1,4 @@
 from functools import cache
-from typing import Tuple
 
 
 def blue(value: str) -> str:
@@ -55,7 +54,7 @@ COLORS = {
 }
 
 
-def color(text: str, value: str | Tuple[int, int, int]) -> str:
+def color(text: str, value: str | tuple[int, int, int]) -> str:
     if not value:
         return text
 
