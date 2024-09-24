@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -
 
 ### Changed
--
+- Updated the `pypa/gh-action-pypi-publish` GitHub action from `master` to `release/v1`
 
 ### Removed
 -
