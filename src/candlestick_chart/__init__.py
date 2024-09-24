@@ -9,9 +9,9 @@ If that URL should fail, try contacting the author.
 """
 
 __version__ = "2.7.1-dev"
-__author__ = "Mickaël 'Tiger-222' Schoentgen"
+__author__ = "Mickaël Schoentgen"
 __copyright__ = f"""
-Copyright (c) 2022-2023, {__author__}
+Copyright (c) 2022-2024, {__author__}
 Permission to use, copy, modify, and distribute this software and its
 documentation for any purpose and without fee or royalty is hereby
 granted, provided that the above copyright notice appear in all copies
