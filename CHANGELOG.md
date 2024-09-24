@@ -9,13 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - CI to automatically publish releases on tag creation
+- `ruff` requirement for the code quality
 
 ### Changed
+- (breaking change) Enforced usage of proper keyword-arguments
+- Use absolute imports
 - Level up the packaging using `hatchling`
+- Pin all requirements
 - Updated README's code example (fixes [#13])
 
 ### Removed
-- 
+- `black`, `flake8`, and `isort`, requirements for the code quality
 
 ## [2.7.0] - 2024-04-23
 

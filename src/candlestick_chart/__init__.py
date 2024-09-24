@@ -7,7 +7,7 @@ You can always get the latest version of this module at:
 If that URL should fail, try contacting the author.
 """
 
-__version__ = "2.7.1-dev"
+__version__ = "3.0.0-dev"
 __author__ = "Mickaël Schoentgen"
 __copyright__ = f"""
 Copyright (c) 2022-2024, {__author__}
@@ -19,8 +19,8 @@ in supporting documentation or portions thereof, including
 modifications, that you make.
 """
 
-from .candle import Candle
-from .chart import Chart
-from .utils import fnum
+from candlestick_chart.candle import Candle
+from candlestick_chart.chart import Chart
+from candlestick_chart.utils import fnum
 
 __all__ = ("Candle", "Chart", "fnum")

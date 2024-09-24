@@ -1,10 +1,17 @@
-import re
-from collections.abc import Iterator
-from pathlib import Path
-from typing import Any
+from __future__ import annotations
 
-from . import constants
-from .candle import Candle, Candles
+import re
+from pathlib import Path
+from typing import TYPE_CHECKING, Any
+
+from candlestick_chart import constants
+from candlestick_chart.candle import Candle
+
+if TYPE_CHECKING:  # pragma: nocover
+    from collections.abc import Iterator
+
+    from candlestick_chart.candle import Candles
+
 
 # For compact numbers formatting
 REPLACE_CONSECUTIVE_ZEROES = re.compile(r"(0\.)(0{4,})(.{4}).*").sub

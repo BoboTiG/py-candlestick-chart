@@ -1,15 +1,19 @@
-from collections.abc import Iterable
+from __future__ import annotations
+
 from typing import TYPE_CHECKING
 
-from .candle import Candles
-from .chart_data import ChartData
-from .chart_renderer import ChartRenderer
-from .info_bar import InfoBar
-from .volume_pane import VolumePane
-from .y_axis import YAxis
+from candlestick_chart.chart_data import ChartData
+from candlestick_chart.chart_renderer import ChartRenderer
+from candlestick_chart.info_bar import InfoBar
+from candlestick_chart.volume_pane import VolumePane
+from candlestick_chart.y_axis import YAxis
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: nocover
+    from collections.abc import Iterable
+
     from rich.console import Console, ConsoleOptions
+
+    from candlestick_chart.candle import Candles
 
 
 class Chart:
@@ -25,6 +29,7 @@ class Chart:
     def __init__(
         self,
         candles: Candles,
+        *,
         title: str = "My chart",
         width: int = 0,
         height: int = 0,
@@ -39,7 +44,7 @@ class Chart:
         # A dict of price -> color to display custom colors on specific prices on the Y-axis
         self.highlights: dict[str, str | tuple[int, int, int]] = {}
 
-    def __rich_console__(self, console: "Console", options: "ConsoleOptions") -> Iterable[str]:
+    def __rich_console__(self, console: Console, options: ConsoleOptions) -> Iterable[str]:
         from rich.ansi import AnsiDecoder
         from rich.console import Group
 
@@ -123,7 +128,7 @@ class Chart:
         """Set the character for drawing the volume bars."""
         self.volume_pane.unicode_fill = unicode_fill
 
-    def update_candles(self, candles: Candles, reset: bool = False) -> None:
+    def update_candles(self, candles: Candles, *, reset: bool = False) -> None:
         """Convenient helper to update candles."""
         if reset:
             self.chart_data.reset_candles()

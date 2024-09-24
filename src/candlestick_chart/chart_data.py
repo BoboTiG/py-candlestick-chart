@@ -1,9 +1,14 @@
-from shutil import get_terminal_size
+from __future__ import annotations
 
-from . import constants
-from .candle import Candles
-from .candle_set import CandleSet
-from .volume_pane import VolumePane
+from shutil import get_terminal_size
+from typing import TYPE_CHECKING
+
+from candlestick_chart import constants
+from candlestick_chart.candle_set import CandleSet
+
+if TYPE_CHECKING:  # pragma: nocover
+    from candlestick_chart.candle import Candles
+    from candlestick_chart.volume_pane import VolumePane
 
 
 class ChartData:
@@ -15,7 +20,7 @@ class ChartData:
         "width",
     )
 
-    def __init__(self, candles: Candles, width: int = 0, height: int = 0) -> None:
+    def __init__(self, candles: Candles, *, width: int = 0, height: int = 0) -> None:
         self.main_candle_set = CandleSet(candles)
         self.visible_candle_set = CandleSet([])
 

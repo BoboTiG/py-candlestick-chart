@@ -1,20 +1,23 @@
+from __future__ import annotations
+
 import math
-from collections.abc import Callable
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-from . import constants
-from .candle import Candle
-from .colors import color
-from .utils import fnum
+from candlestick_chart import constants
+from candlestick_chart.colors import color
+from candlestick_chart.utils import fnum
 
-if TYPE_CHECKING:
-    from .chart_data import ChartData
+if TYPE_CHECKING:  # pragma: nocover
+    from collections.abc import Callable
+
+    from candlestick_chart.candle import Candle
+    from candlestick_chart.chart_data import ChartData
 
 
 @dataclass(slots=True)
 class YAxis:
-    chart_data: "ChartData"
+    chart_data: ChartData
 
     def price_to_heights(self, candle: Candle) -> tuple[float, ...]:
         chart_data = self.chart_data
@@ -34,7 +37,7 @@ class YAxis:
             (min_open - min_value) / diff * height,  # min_y
         )
 
-    def render_line(self, y: int, highlights: dict[str, str | tuple[int, int, int]] | None = None) -> str:
+    def render_line(self, y: int, *, highlights: dict[str, str | tuple[int, int, int]] | None = None) -> str:
         return (
             self.render_empty(y=y, highlights=highlights)
             if y % constants.Y_AXIS_SPACING
@@ -44,6 +47,7 @@ class YAxis:
     def _round_price(
         self,
         value: float,
+        *,
         fn_down: Callable[[float], float] = math.floor,
         fn_up: Callable[[float], float] = math.ceil,
     ) -> str:
@@ -86,6 +90,7 @@ class YAxis:
 
     def render_empty(
         self,
+        *,
         y: float | None = None,
         highlights: dict[str, str | tuple[int, int, int]] | None = None,
     ) -> str:

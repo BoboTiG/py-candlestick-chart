@@ -1,14 +1,16 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
 from math import ceil, floor
 from typing import TYPE_CHECKING
 
-from . import constants
-from .candle import Candle, CandleType
-from .colors import truecolor
-from .y_axis import YAxis
+from candlestick_chart import constants
+from candlestick_chart.candle import Candle, CandleType
+from candlestick_chart.colors import truecolor
 
-if TYPE_CHECKING:
-    from .chart import Chart
+if TYPE_CHECKING:  # pragma: nocover
+    from candlestick_chart.chart import Chart
+    from candlestick_chart.y_axis import YAxis
 
 
 @dataclass(slots=True)
@@ -63,7 +65,7 @@ class ChartRenderer:
 
         return self._colorize(candle.type, output)
 
-    def render(self, chart: "Chart") -> str:
+    def render(self, chart: Chart) -> str:
         output: list[str] = []
         chart_data = chart.chart_data
         chart_data.compute_height(chart.volume_pane)
@@ -78,12 +80,12 @@ class ChartRenderer:
             if graduations_on_right:
                 output.append("\n")
             else:
-                output.extend(("\n", render_line(y, highlights)))
+                output.extend(("\n", render_line(y=y, highlights=highlights)))
 
             output.extend(self._render_candle(candle, y, chart.y_axis) for candle in candles)
 
             if graduations_on_right:
-                output.append(render_line(y, highlights))
+                output.append(render_line(y=y, highlights=highlights))
 
         if chart.volume_pane.enabled:
             render_empty = chart.y_axis.render_empty

@@ -1,6 +1,10 @@
-from dataclasses import dataclass
+from __future__ import annotations
 
-from .candle import Candles
+from dataclasses import dataclass
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:  # pragma: nocover
+    from candlestick_chart.candle import Candles
 
 
 @dataclass(slots=True)

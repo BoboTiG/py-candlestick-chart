@@ -1,5 +1,8 @@
+from __future__ import annotations
+
 import sys
 from argparse import ArgumentParser, Namespace, RawDescriptionHelpFormatter
+from typing import TYPE_CHECKING
 
 from candlestick_chart import Chart, __version__
 from candlestick_chart.utils import (
@@ -8,6 +11,9 @@ from candlestick_chart.utils import (
     parse_candles_from_json,
     parse_candles_from_stdin,
 )
+
+if TYPE_CHECKING:  # pragma: nocover
+    from argparse import Namespace
 
 
 def get_args() -> Namespace:

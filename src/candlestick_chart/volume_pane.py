@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from math import ceil
 
-from . import constants
-from .candle import Candle, CandleType
-from .colors import truecolor
+from candlestick_chart import constants
+from candlestick_chart.candle import Candle, CandleType
+from candlestick_chart.colors import truecolor
 
 
 @dataclass(slots=True)
