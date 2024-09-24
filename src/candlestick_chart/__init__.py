@@ -7,7 +7,7 @@ You can always get the latest version of this module at:
 If that URL should fail, try contacting the author.
 """
 
-__version__ = "3.0.0"
+__version__ = "3.0.1-dev"
 __author__ = "Mickaël Schoentgen"
 __copyright__ = f"""
 Copyright (c) 2022-2024, {__author__}
