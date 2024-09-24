@@ -101,7 +101,7 @@ chart.draw()
 When installing the library, an executable is made available (`candlestick-chart`):
 
 ```bash
-$ candlestick-chart --help             
+candlestick-chart --help
 
 options:
   -h, --help            show this help message and exit
@@ -158,7 +158,7 @@ For all requests, here are supported fields:
 ### Read CSV from file
 
 ```bash
-$ candlestick-chart \
+candlestick-chart \
     --mode=csv-file \
     --file='./examples/BTC-USD.csv' \
     --chart-name='My BTC Chart' \
@@ -168,7 +168,7 @@ $ candlestick-chart \
 ### Read JSON from file
 
 ```bash
-$ candlestick-chart \
+candlestick-chart \
     --mode=json-file \
     --file='./examples/BTC-chart.json' \
     --chart-name='My BTC Chart' \
