@@ -54,7 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The module is is now PEP 561 compatible, and tested with `mypy`
 
 ### Changed
-- Fixed off-by-one shift when rendering empty lines on the Y-axis (the issue was visible only when the Y-axis was on the left side)
+- Fixed off-by-one shift when rendering empty lines on the Y-axis (the issue was visible only when the Y-axis was on the left side) (fixes [#7])
 
 ## [2.5.1] - 2022-10-21
 
@@ -146,6 +146,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#3]: https://github.com/BoboTiG/py-candlestick-chart/issues/3
 [#4]: https://github.com/BoboTiG/py-candlestick-chart/issues/4
 [#5]: https://github.com/BoboTiG/py-candlestick-chart/issues/5
+[#7]: https://github.com/BoboTiG/py-candlestick-chart/issues/7
 [#9]: https://github.com/BoboTiG/py-candlestick-chart/issues/9
 [#13]: https://github.com/BoboTiG/py-candlestick-chart/issues/13
 [#15]: https://github.com/BoboTiG/py-candlestick-chart/pull/15
