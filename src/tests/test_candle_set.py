@@ -13,7 +13,7 @@ def test_compute_all() -> None:
     assert candle_set.candles == candles
     assert candle_set.min_price == 28_722.755859
     assert candle_set.max_price == 67_673.742188
-    assert candle_set.min_volume == 0.0
+    assert candle_set.min_volume == 18_787_986_667.0
     assert candle_set.max_volume == 350_967_941_479.0
     assert candle_set.variation == 133.037_198_615_531_42
     assert candle_set.average == 46_375.191_043_259_58

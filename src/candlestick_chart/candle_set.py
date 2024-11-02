@@ -45,7 +45,7 @@ class CandleSet:
         max_price = 0.0
         min_price = float("inf")
         max_volume = 0.0
-        min_volume = 0.0
+        min_volume = float("inf")
 
         for candle in candles:
             volume = candle.volume
