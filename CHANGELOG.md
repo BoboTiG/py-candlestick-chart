@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `utils.round_price()` to either round down, or up, the price on the Y-axis. Previously, it was a private method of the `YAxis` class.
 
 ### Changed
-- Fixed `CandleSet.min_volume` being always `0.0`.
+- Fixed `CandleSet.min_volume` being always `0.0` (commit [6975d7f]).
 - `utils.parse_candles_from_csv()` and `utils.parse_candles_from_json()` now also accept a `pathlib.Path` argument, in addition to the original `str`.
 - Updated the `pypa/gh-action-pypi-publish` GitHub action from `master` to `release/v1`
 
@@ -153,3 +153,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#9]: https://github.com/BoboTiG/py-candlestick-chart/issues/9
 [#13]: https://github.com/BoboTiG/py-candlestick-chart/issues/13
 [#15]: https://github.com/BoboTiG/py-candlestick-chart/pull/15
+
+[6975d7f]: https://github.com/BoboTiG/py-candlestick-chart/commit/6975d7fc1952c03af251bb12e758827cbea5b3ad
