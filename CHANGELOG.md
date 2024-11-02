@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased] - 202x-xx-xx
+
+### Added
+- 
+
+### Changed
+- 
+
+### Removed
+-
 
 ## [3.1.0] - 2024-11-02
 
@@ -13,11 +23,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Introduce `constants.UNICODE_Y_AXIS`, `constants.UNICODE_Y_AXIS_LEFT`, and `constants.UNICODE_Y_AXIS_RIGHT`, constants to control the Unicode character printed next to prices on the Y-axis (defaults to `│`, `┤`, and `├`, respectively).
 - New color: gray (which is an alias to the misspelled "grey").
 - New `utils.round_price()` function to either round down, or up, the price on the Y-axis. Previously, it was a private method of the `YAxis` class.
+- 100% coverage with tests!
 
 ### Changed
 - Fixed `CandleSet.min_volume` being always `0.0` (commit [6975d7f]).
 - Those functions now also accept a `pathlib.Path` argument, in addition to the original `str`: `utils.parse_candles_from_csv()`, and `utils.parse_candles_from_json()`.
-- 100% coverage with tests!
 - Updated the `pypa/gh-action-pypi-publish` GitHub action from `master` to `release/v1`.
 
 ## [3.0.0] - 2024-09-24
@@ -131,6 +141,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - First version.
 
 
+[Unreleased]: https://github.com/BoboTiG/py-candlestick-chart/compare/v3.1.0...HEAD
 [3.1.0]: https://github.com/BoboTiG/py-candlestick-chart/tree/v3.1.0
 [3.0.0]: https://github.com/BoboTiG/py-candlestick-chart/tree/v3.0.0
 [2.7.0]: https://github.com/BoboTiG/py-candlestick-chart/tree/v2.7.0
