@@ -85,11 +85,11 @@ class YAxis:
                 return price
 
         if constants.Y_AXIS_ON_THE_RIGHT:
-            return " │"
+            return f" {constants.UNICODE_Y_AXIS}"
 
         cell = " " * (constants.CHAR_PRECISION + constants.DEC_PRECISION + 2)
         margin = " " * constants.MARGIN_RIGHT
-        return f"{cell}│{margin}"
+        return f"{cell}{constants.UNICODE_Y_AXIS}{margin}"
 
     def _render_tick(self, y: int, highlights: dict[str, str | tuple[int, int, int]]) -> str:
         _, price = self._render_price(y, highlights)
