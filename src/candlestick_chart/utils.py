@@ -51,14 +51,14 @@ def make_candles(iterator: Iterator[Any]) -> Candles:
     return [Candle(**item) for item in iterator]
 
 
-def parse_candles_from_csv(file: str) -> Candles:
+def parse_candles_from_csv(file: str | Path) -> Candles:
     import csv
 
     with Path(file).open() as fh:
         return make_candles(csv.DictReader(fh))
 
 
-def parse_candles_from_json(file: str) -> Candles:
+def parse_candles_from_json(file: str | Path) -> Candles:
     import json
 
     return make_candles(json.loads(Path(file).read_text()))
