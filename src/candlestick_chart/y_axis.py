@@ -7,7 +7,7 @@ from candlestick_chart import constants
 from candlestick_chart.colors import color
 from candlestick_chart.utils import round_price
 
-if TYPE_CHECKING:  # pragma: nocover
+if TYPE_CHECKING:
     from candlestick_chart.candle import Candle
     from candlestick_chart.chart_data import ChartData
 

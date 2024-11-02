@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 from candlestick_chart import constants
 from candlestick_chart.candle_set import CandleSet
 
-if TYPE_CHECKING:  # pragma: nocover
+if TYPE_CHECKING:
     from candlestick_chart.candle import Candles
     from candlestick_chart.volume_pane import VolumePane
 

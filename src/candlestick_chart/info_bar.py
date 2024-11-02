@@ -8,7 +8,7 @@ from candlestick_chart import constants
 from candlestick_chart.colors import bold, green, red, yellow
 from candlestick_chart.utils import fnum
 
-if TYPE_CHECKING:  # pragma: nocover
+if TYPE_CHECKING:
     from types import SimpleNamespace
 
     from candlestick_chart.candle_set import CandleSet

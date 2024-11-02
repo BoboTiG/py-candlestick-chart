@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING, Any
 from candlestick_chart import constants
 from candlestick_chart.candle import Candle
 
-if TYPE_CHECKING:  # pragma: nocover
+if TYPE_CHECKING:
     from collections.abc import Callable, Iterator
 
     from candlestick_chart.candle import Candles

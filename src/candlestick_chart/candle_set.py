@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:  # pragma: nocover
+if TYPE_CHECKING:
     from candlestick_chart.candle import Candles
 
 

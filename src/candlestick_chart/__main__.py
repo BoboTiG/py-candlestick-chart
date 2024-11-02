@@ -12,7 +12,7 @@ from candlestick_chart.utils import (
     parse_candles_from_stdin,
 )
 
-if TYPE_CHECKING:  # pragma: nocover
+if TYPE_CHECKING:
     from argparse import Namespace
 
 
@@ -66,5 +66,5 @@ def main() -> int:
     return 0
 
 
-if __name__ == "__main__":  # pragma: nocover
+if __name__ == "__main__":
     sys.exit(main())

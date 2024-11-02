@@ -8,7 +8,7 @@ from candlestick_chart.info_bar import InfoBar
 from candlestick_chart.volume_pane import VolumePane
 from candlestick_chart.y_axis import YAxis
 
-if TYPE_CHECKING:  # pragma: nocover
+if TYPE_CHECKING:
     from collections.abc import Iterable
 
     from rich.console import Console, ConsoleOptions

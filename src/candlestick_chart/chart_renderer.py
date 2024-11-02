@@ -8,7 +8,7 @@ from candlestick_chart import constants
 from candlestick_chart.candle import Candle, CandleType
 from candlestick_chart.colors import truecolor
 
-if TYPE_CHECKING:  # pragma: nocover
+if TYPE_CHECKING:
     from candlestick_chart.chart import Chart
     from candlestick_chart.y_axis import YAxis
 
