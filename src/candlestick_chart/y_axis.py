@@ -1,16 +1,13 @@
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 from candlestick_chart import constants
 from candlestick_chart.colors import color
-from candlestick_chart.utils import fnum
+from candlestick_chart.utils import round_price
 
 if TYPE_CHECKING:  # pragma: nocover
-    from collections.abc import Callable
-
     from candlestick_chart.candle import Candle
     from candlestick_chart.chart_data import ChartData
 
@@ -44,21 +41,6 @@ class YAxis:
             else self._render_tick(y, highlights or {})
         )
 
-    def _round_price(
-        self,
-        value: float,
-        *,
-        fn_down: Callable[[float], float] = math.floor,
-        fn_up: Callable[[float], float] = math.ceil,
-    ) -> str:
-        if constants.Y_AXIS_ROUND_MULTIPLIER > 0.0:
-            multiplier = constants.Y_AXIS_ROUND_MULTIPLIER
-            if constants.Y_AXIS_ROUND_DIR == "down":
-                value = fn_down(value * multiplier) / multiplier
-            else:
-                value = fn_up(value * multiplier) / multiplier
-        return fnum(value)
-
     def _render_price(self, y: float, highlights: dict[str, str | tuple[int, int, int]]) -> tuple[bool, str]:
         chart_data = self.chart_data
         min_value = chart_data.visible_candle_set.min_price
@@ -66,8 +48,8 @@ class YAxis:
         height = chart_data.height
 
         cell_min_length = constants.CHAR_PRECISION + constants.DEC_PRECISION + 1
-        price = self._round_price(min_value + (y * (max_value - min_value) / height))
-        price_upper = self._round_price(min_value + ((y + 1) * (max_value - min_value) / height))
+        price = round_price(min_value + (y * (max_value - min_value) / height))
+        price_upper = round_price(min_value + ((y + 1) * (max_value - min_value) / height))
 
         has_special_price = False
         custom_color: str | tuple[int, int, int] = ""

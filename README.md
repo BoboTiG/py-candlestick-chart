@@ -34,8 +34,6 @@ Note: not tested on macOS, nor Windows (it will likely fail to render colors).
 
 ## Installation
 
-As simple as:
-
 ```bash
 $ python -m pip install -U candlestick-chart
 ```
@@ -44,6 +42,7 @@ $ python -m pip install -U candlestick-chart
 
 ```python
 from candlestick_chart import Candle, Chart
+
 
 # Add some candles
 candles = [

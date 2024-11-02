@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Support for Python 3.14
+- `utils.round_price()` to either round down, or up, the price on the Y-axis. Previously, it was a private method of the `YAxis` class.
 
 ### Changed
 - Updated the `pypa/gh-action-pypi-publish` GitHub action from `master` to `release/v1`

@@ -142,3 +142,19 @@ def test_parse_candles_from_stdin(monkeypatch: pytest.MonkeyPatch) -> None:
         volume=0.0,
         timestamp=0.0,
     )
+
+
+@pytest.mark.parametrize(
+    ("value", "expected_down", "expected_up"),
+    [
+        (0.0, "0.00", "0.00"),
+        (0.01234, "0.0100", "0.0200"),
+        (32_574.913_021_333_333, "32,574.91", "32,574.92"),
+    ],
+)
+def test_round_price(value: float, expected_down: str, expected_up: str) -> None:
+    with patch("candlestick_chart.constants.Y_AXIS_ROUND_MULTIPLIER", 1 / 0.01):
+        with patch("candlestick_chart.constants.Y_AXIS_ROUND_DIR", "down"):
+            assert utils.round_price(value) == expected_down
+        with patch("candlestick_chart.constants.Y_AXIS_ROUND_DIR", "up"):
+            assert utils.round_price(value) == expected_up

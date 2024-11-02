@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import math
 import re
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
@@ -8,7 +9,7 @@ from candlestick_chart import constants
 from candlestick_chart.candle import Candle
 
 if TYPE_CHECKING:  # pragma: nocover
-    from collections.abc import Iterator
+    from collections.abc import Callable, Iterator
 
     from candlestick_chart.candle import Candles
 
@@ -68,3 +69,15 @@ def parse_candles_from_stdin() -> Candles:
     import sys
 
     return make_candles(json.loads("".join(sys.stdin)))
+
+
+def round_price(
+    value: float, *, fn_down: Callable[[float], float] = math.floor, fn_up: Callable[[float], float] = math.ceil
+) -> str:
+    if constants.Y_AXIS_ROUND_MULTIPLIER > 0.0:
+        multiplier = constants.Y_AXIS_ROUND_MULTIPLIER
+        if constants.Y_AXIS_ROUND_DIR == "down":
+            value = fn_down(value * multiplier) / multiplier
+        else:
+            value = fn_up(value * multiplier) / multiplier
+    return fnum(value)
