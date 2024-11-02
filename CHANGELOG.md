@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## [Unreleased] - 202x-xx-xx
+## [3.1.0] - 2024-11-02
 
 ### Added
 - Support for Python 3.14.
@@ -19,9 +19,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Those functions now also accept a `pathlib.Path` argument, in addition to the original `str`: `utils.parse_candles_from_csv()`, and `utils.parse_candles_from_json()`.
 - 100% coverage with tests!
 - Updated the `pypa/gh-action-pypi-publish` GitHub action from `master` to `release/v1`.
-
-### Removed
--
 
 ## [3.0.0] - 2024-09-24
 
@@ -134,7 +131,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - First version.
 
 
-[Unreleased]: https://github.com/BoboTiG/py-candlestick-chart/compare/v3.0.0...HEAD
+[3.1.0]: https://github.com/BoboTiG/py-candlestick-chart/tree/v3.1.0
 [3.0.0]: https://github.com/BoboTiG/py-candlestick-chart/tree/v3.0.0
 [2.7.0]: https://github.com/BoboTiG/py-candlestick-chart/tree/v2.7.0
 [2.6.0]: https://github.com/BoboTiG/py-candlestick-chart/tree/v2.6.0
