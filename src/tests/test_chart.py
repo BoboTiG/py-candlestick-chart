@@ -1,3 +1,5 @@
+from unittest.mock import patch
+
 import pytest
 from rich.console import Console
 
@@ -22,6 +24,22 @@ def test_rich_repr(chart: Chart) -> None:
 
     output = capture.get()
     assert chart.info_bar.name in output
+    assert constants.UNICODE_Y_AXIS_LEFT in output
+    assert constants.UNICODE_Y_AXIS_RIGHT not in output
+
+
+def test_rich_repr_with_y_axis_on_the_right(chart: Chart) -> None:
+    console = Console(highlight=False, force_terminal=True, width=WIDTH, height=HEIGHT)
+    with (
+        patch("candlestick_chart.constants.Y_AXIS_ON_THE_RIGHT", True),  # noqa: FBT003
+        console.capture() as capture,
+    ):
+        console.print(chart)
+
+    output = capture.get()
+    assert chart.info_bar.name in output
+    assert constants.UNICODE_Y_AXIS_LEFT not in output
+    assert constants.UNICODE_Y_AXIS_RIGHT in output
 
 
 def test_set_label(chart: Chart) -> None:

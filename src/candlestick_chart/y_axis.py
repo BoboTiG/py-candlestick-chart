@@ -63,9 +63,12 @@ class YAxis:
             break
 
         price = (
-            f" {color(f'├ {price:<{cell_min_length}}', custom_color)}"
+            f" {color(f'{constants.UNICODE_Y_AXIS_RIGHT} {price:<{cell_min_length}}', custom_color)}"
             if constants.Y_AXIS_ON_THE_RIGHT
-            else f"{color(f'{price:<{cell_min_length}} ┤', custom_color)}{' ' * constants.MARGIN_RIGHT}"
+            else (
+                f"{color(f'{price:<{cell_min_length}} {constants.UNICODE_Y_AXIS_LEFT}', custom_color)}"
+                f"{' ' * constants.MARGIN_RIGHT}"
+            )
         )
 
         return has_special_price, price
