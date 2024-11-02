@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Fixed `CandleSet.min_volume` being always `0.0` (commit [6975d7f]).
 - Those functions now also accept a `pathlib.Path` argument, in addition to the original `str`: `utils.parse_candles_from_csv()`, and `utils.parse_candles_from_json()`.
+- 100% coverage with tests!
 - Updated the `pypa/gh-action-pypi-publish` GitHub action from `master` to `release/v1`.
 
 ### Removed
