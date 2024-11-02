@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from copy import copy
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
 from candlestick_chart import constants
@@ -9,13 +9,19 @@ from candlestick_chart.colors import bold, green, red, yellow
 from candlestick_chart.utils import fnum
 
 if TYPE_CHECKING:  # pragma: nocover
+    from types import SimpleNamespace
+
     from candlestick_chart.candle_set import CandleSet
+
+
+def _get_labels() -> SimpleNamespace:
+    return copy(constants.LABELS)
 
 
 @dataclass(slots=True)
 class InfoBar:
     name: str
-    labels = copy(constants.LABELS)
+    labels: SimpleNamespace = field(init=False, default_factory=_get_labels)
 
     def _render_average(self, candle_set: CandleSet) -> str:
         if not self.labels.average:
