@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Support for Python 3.14.
+- New color: gray (which is an alias to the misspelled "grey").
 - New `utils.round_price()` function to either round down, or up, the price on the Y-axis. Previously, it was a private method of the `YAxis` class.
 
 ### Changed
@@ -78,7 +79,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Capability to highlight values on the Y-axis using `chart.set_highlight()`.
-- New colors: blue, cyan, gray, magenta, and white.
+- New colors: blue, cyan, grey, magenta, and white.
 
 ## [2.3.0] - 2022-09-23
 

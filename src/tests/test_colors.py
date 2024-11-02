@@ -25,6 +25,7 @@ def test_color(custom_color: str, expected: str) -> None:
         ("blue", "\x1b[94mfoo\x1b[00m"),
         ("bold", "\x1b[01mfoo\x1b[00m"),
         ("cyan", "\x1b[96mfoo\x1b[00m"),
+        ("gray", "\x1b[90mfoo\x1b[00m"),
         ("grey", "\x1b[90mfoo\x1b[00m"),
         ("magenta", "\x1b[95mfoo\x1b[00m"),
         ("red", "\x1b[91mfoo\x1b[00m"),

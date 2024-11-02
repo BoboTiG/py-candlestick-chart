@@ -17,6 +17,9 @@ def grey(value: str) -> str:
     return f"\033[90m{value}\033[00m"
 
 
+gray = grey
+
+
 def green(value: str) -> str:
     return f"\033[92m{value}\033[00m"
 
@@ -46,6 +49,7 @@ COLORS = {
     "blue": blue,
     "cyan": cyan,
     "green": green,
+    "gray": gray,
     "grey": grey,
     "magenta": magenta,
     "red": red,
