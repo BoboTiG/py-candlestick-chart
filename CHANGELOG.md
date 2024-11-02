@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Support for Python 3.14.
-- New `constants.UNICODE_Y_AXIS_LEFT`, and `constants.UNICODE_Y_AXIS_RIGHT`, constants to control the Unicode character printed next to prices on the Y-axis (defaults to `┤`, and `├`, respectively).
+- Introduce `constants.UNICODE_Y_AXIS_LEFT`, and `constants.UNICODE_Y_AXIS_RIGHT`, constants to control the Unicode character printed next to prices on the Y-axis (defaults to `┤`, and `├`, respectively).
 - New color: gray (which is an alias to the misspelled "grey").
 - New `utils.round_price()` function to either round down, or up, the price on the Y-axis. Previously, it was a private method of the `YAxis` class.
 
