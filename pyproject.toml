@@ -71,7 +71,7 @@ test = [
   "pytest-cov==6.0.0",
   "requests==2.32.3",
   "rich==13.9.4",
-  "ruff==0.8.0",
+  "ruff==0.8.1",
   "types-requests",
 ]
 dev = [
