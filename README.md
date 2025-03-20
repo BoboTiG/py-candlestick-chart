@@ -1,5 +1,7 @@
 # Python Candlesticks Chart
 
+[![Patreon](https://img.shields.io/badge/Patreon-F96854?style=for-the-badge&logo=patreon&logoColor=white)](https://www.patreon.com/mschoentgen)
+
 📈 Draw candlesticks charts right into your terminal, using Python!
 
 ![Preview](examples/screenshot.png)
