@@ -69,7 +69,7 @@ test = [
   "mypy==1.16.0",
   "pytest==8.4.0",
   "pytest-cov==6.1.1",
-  "requests==2.32.3",
+  "requests==2.32.4",
   "rich==14.0.0",
   "ruff==0.11.13",
   "types-requests",
