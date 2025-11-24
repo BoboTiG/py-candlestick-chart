@@ -34,7 +34,7 @@ jobs:
           - name: CPython 3.10
             runs-on: "3.10"
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
         with:
           cache: pip
