@@ -67,7 +67,7 @@ candlestick-chart = "candlestick_chart.__main__:main"
 [project.optional-dependencies]
 test = [
   "mypy==1.19.0",
-  "pytest==9.0.1",
+  "pytest==9.0.2",
   "pytest-cov==7.0.0",
   "requests==2.32.5",
   "rich==14.2.0",
