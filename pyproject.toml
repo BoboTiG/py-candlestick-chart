@@ -70,7 +70,7 @@ test = [
   "pytest==9.0.2",
   "pytest-cov==7.0.0",
   "requests==2.32.5",
-  "rich==14.3.1",
+  "rich==14.3.2",
   "ruff==0.14.14",
   "types-requests",
 ]
