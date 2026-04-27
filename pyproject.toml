@@ -75,7 +75,7 @@ test = [
   "types-requests",
 ]
 dev = [
-  "build==1.4.3",
+  "build==1.4.4",
   "twine==6.2.0",
 ]
 
