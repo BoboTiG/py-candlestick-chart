@@ -40,7 +40,10 @@ def get_args() -> Namespace:
     parser.add_argument("--bear-color", help="Sets the descending candles color in hexadecimal.")
     parser.add_argument("--bull-color", help="Sets the ascending candles color in hexadecimal.")
     parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
-    return parser.parse_args(sys.argv[1:])
+    options = parser.parse_args(sys.argv[1:])
+    if options.mode.endswith("-file") and not options.file:
+        parser.error(f"--file is required when --mode is {options.mode!r}.")
+    return options
 
 
 def main() -> int:

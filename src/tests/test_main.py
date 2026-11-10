@@ -53,3 +53,12 @@ def test_mode_csv_file(additional_arg: str) -> None:
 def test_mode_json_file(additional_arg: str) -> None:
     file = EXAMPLES / "BTC-chart.json"
     run(["--mode=json-file", f"--file={file}", additional_arg])
+
+
+@pytest.mark.parametrize("mode", ["csv-file", "json-file"])
+def test_mode_file_requires_file(mode: str, capsys: pytest.CaptureFixture[str]) -> None:
+    with patch.object(sys, "argv", ["candlestick-chart", f"--mode={mode}"]):
+        with pytest.raises(SystemExit) as exc_info:
+            main()
+    assert exc_info.value.code == 2
+    assert "--file is required" in capsys.readouterr().err
